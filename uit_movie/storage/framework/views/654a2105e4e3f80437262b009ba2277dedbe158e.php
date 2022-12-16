@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
     <!-- BOX ICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- APP CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('./css/movie_detail.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('./css/grid.css')); ?>">
@@ -79,12 +80,14 @@
 
       <div id="__next">
          <div class="">
-            <div class="backdrop" style="background-image:url(https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg)"></div>
+           <div class="backdrop" style="background-image:url(https://image.tmdb.org/t/p/original/<?php echo e($movie_info['backdrop_path']); ?>)"></div>
+
              <section class="section">
                <div class="container shiftup mb-auto">
                   <div class="tt-details columns is-variable is-8">
                      <div class="column is-one-quarter-tablet">
-                        <p class="cover has-text-centered"> <img src="<?php echo e(asset('./images/movies/transformer.jpg')); ?>" alt=""></p>
+                        <p class="cover has-text-centered"> <img src="<?php echo e(asset('uploads/movie/'.$movie_slug->image ?? 'cat9180.jpg')); ?>" alt=""></p>
+
                         <a class="watch button is-danger is-medium is-fullwidth" href="https://xemphimm.com/watch/26790">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                               <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
@@ -93,11 +96,18 @@
                         </a>
                      </div>
                      <div class="column main">
-                        <h1 class="title is-2">Black Adam</h1>
+                        <h1 class="title is-2"><?php echo e($movie_slug->title); ?></h1>
                         <h2 class="subtitle is-4">
-                           Black Adam<!-- --> (<a href="https://xemphimm.com/year/2022">2022</a>)
+                           <?php if($movie_check==1): ?>
+                              <?php echo e($movie_info['original_name']); ?>
+
+                           <?php else: ?>
+                              <?php echo e($movie_info['title']); ?>
+
+                           <?php endif; ?>
+                            (<a href="https://xemphimm.com/year/2022">2022</a>)
                         </h2>
-                        <div class="meta"><span>2 giờ 4 phút</span></div>
+                        <div class="meta"><span><?php echo e($movie_slug->runtime); ?> phút</span></div>
                         <div class="meta">
                            <span class="imdb-icon">
                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
@@ -105,7 +115,7 @@
                                  <path d="M28.102 18h-3.704v13.102h3.704c2 0 2.796-.403 3.296-.704.602-.398.903-1.097.903-1.796v-7.903c0-.898-.403-1.699-.903-2-.796-.5-1.097-.699-3.296-.699zm.699 10.3c0 .598-.7.598-1.301.598V20c.602 0 1.3 0 1.3.602zM33.8 18v13.3h2.802s.199-.902.398-.698c.398 0 1.5.597 2.2.597.698 0 1.1 0 1.5-.199.6-.398.698-.7.698-1.3v-7.802c0-1.097-1.097-1.796-2-1.796-.898 0-1.796.597-2.199.898v-3zm3.598 4.2c0-.4 0-.598.403-.598.199 0 .398.199.398.597v6.602c0 .398 0 .597-.398.597-.2 0-.403-.199-.403-.597zM22.7 31.3V18h-4.4l-.8 6.3-1.102-6.3h-4v13.3h2.903v-7.402l1.3 7.403h2l1.297-7.403v7.403zM7.602 18h3.097v13.3H7.602z" fill="#263238"></path>
                               </svg>
                            </span>
-                           <span class="has-text-weight-bold">6.7</span>
+                           <span class="has-text-weight-bold"><?php echo e($movie_slug->imdb_point); ?></span>
                         </div>
                         <div class="level genres">
                            <div class="level-left">
@@ -136,404 +146,103 @@
                         </div>
                         <dl class="horizontal-dl">
                            <dt>Đạo diễn</dt>
-                           <dd class="csv"><a href="https://xemphimm.com/person/jaume-collet-serra~1843">Jaume Collet-Serra</a></dd>
+                           <dd class="csv">
+                          
+                            <?php $__currentLoopData = $movie_credits['crew']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $credit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                 <?php if($credit['job']=="Director"): ?>
+                                    <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=<?php echo e($credit['name']); ?>" style="text-decoration:none"><?php echo e($credit['name']); ?></a>&nbsp
+                                 <?php endif; ?>
+                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                           </dd>
                            <dt>Kịch bản</dt>
-                           <dd class="csv"><a href="https://xemphimm.com/person/adam-sztykiel~69636">Adam Sztykiel</a><a href="https://xemphimm.com/person/rory-haines~157236">Rory Haines</a><a href="https://xemphimm.com/person/sohrab-noshirvani~157235">Sohrab Noshirvani</a></dd>
+                           <dd class="csv">
+                          
+                                 <?php $__currentLoopData = $movie_credits['crew']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $credit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if($credit['job']=="Novel" or $credit['job']=="Story" ): ?>
+                                       <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=<?php echo e($credit['name']); ?>" style="text-decoration:none"><?php echo e($credit['name']); ?></a>&nbsp
+                                    <?php endif; ?>
+                                  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+                           </dd>
                            <dt>Quốc gia</dt>
                            <dd class="csv"><a href="https://xemphimm.com/country/US">Mỹ</a></dd>
                            <dt>Khởi chiếu</dt>
-                           <dd>10/19/2022</dd>
+                           <dd><?php echo e($movie_slug->date_release); ?></dd>
                         </dl>
-                        <div class="intro has-text-grey-light">Dwayne Johnson sẽ góp mặt trong tác phẩm hành động - phiêu lưu mới của New Line Cinema, mang tên BLACK ADAM. Đây là bộ phim đầu tiên trên màn ảnh rộng khai thác câu chuyện của siêu anh hùng DC này, dưới sự sáng tạo của đạo diễn Jaume Collet-Serra (đạo diễn của Jungle Cruise). Gần 5.000 năm sau khi bị cầm tù với quyền năng tối thượng từ những vị thần cổ đại, Black Adam (Dwayne Johnson) sẽ được giải phóng khỏi nấm mồ chết chóc của mình, mang tới thế giới hiện đại một kiểu nhận thức về công lý hoàn toàn mới.</div>
+                        <div class="intro has-text-grey-light"><?php echo e($movie_slug->description); ?></div>
                         <h3 class="section-header">Diễn viên</h3>
-                        <div class="cast">
+                        <div class="cast"> 
                            <div class="slick-slider slick-initialized" dir="ltr">
-                              <div class="slick-arrow slick-prev slick-disabled" style="display:block">
+                              <!-- <div class="slick-arrow slick-prev slick-disabled" style="display:block">
                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                     <path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
                                  </svg>
-                              </div>
+                              </div> -->
                               <div class="slick-list">
-                                 <div class="slick-track" style="width: 8632px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                                    <div data-index="0" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
+                                 <div class="slick-track movie-cast carousel-nav-center owl-carousel" style="width: auto; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                    <?php $__currentLoopData = $movie_credits['cast']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $credit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div data-index="<?php echo e($key); ?>" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
                                        <div>
                                           <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/dwayne-johnson~675">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Dwayne Johnson"></figure>
+                                             <a class="image" target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=<?php echo e($credit['name']); ?>">
+                                          <figure><img src="https://image.tmdb.org/t/p/original/<?php echo e($credit['profile_path']); ?>" alt="<?php echo e($credit['name']); ?>"></figure>
                                              </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/dwayne-johnson~675">Dwayne Johnson</a></p>
-                                             <p class="character">Black Adam / Teth Adam</p>
+                                             <p><a class="name" target="_blank" rel="noopener noreferrer" href="https://www.google.com/search?q=<?php echo e($credit['name']); ?>"><?php echo e($credit['name']); ?></a></p>
+                                             <p class="character"><?php echo e($credit['character']); ?></p>
                                           </div>
                                        </div>
                                     </div>
-                                    <div data-index="1" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/aldis-hodge~11285">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Aldis Hodge"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/aldis-hodge~11285">Aldis Hodge</a></p>
-                                             <p class="character">Hawkman / Carter Hall</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="2" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/noah-centineo~50439">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Noah Centineo"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/noah-centineo~50439">Noah Centineo</a></p>
-                                             <p class="character">Atom Smasher / Al Rothstein</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="3" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/sarah-shahi~27558">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Sarah Shahi"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/sarah-shahi~27558">Sarah Shahi</a></p>
-                                             <p class="character">Adrianna Tomaz</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="4" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/quintessa-swindell~103722">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Quintessa Swindell"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/quintessa-swindell~103722">Quintessa Swindell</a></p>
-                                             <p class="character">Cyclone / Maxine Hunkel</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="5" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/marwan-kenzari~3677">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Marwan Kenzari"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/marwan-kenzari~3677">Marwan Kenzari</a></p>
-                                             <p class="character">Ishmael / Sabbac / King Ahk-Ton</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="6" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/mo-amer~128554">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Mo Amer"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/mo-amer~128554">Mo Amer</a></p>
-                                             <p class="character">Karim</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="7" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/bodhi-sabongui~119457">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Bodhi Sabongui"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/bodhi-sabongui~119457">Bodhi Sabongui</a></p>
-                                             <p class="character">Amon Tomaz</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="8" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/pierce-brosnan~2319">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Pierce Brosnan"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/pierce-brosnan~2319">Pierce Brosnan</a></p>
-                                             <p class="character">Dr. Fate / Kent Nelson</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="9" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/james-cusati-moyer~151091">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="James Cusati-Moyer"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/james-cusati-moyer~151091">James Cusati-Moyer</a></p>
-                                             <p class="character">Samir</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="10" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/jalon-christian~151626">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Jalon Christian"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/jalon-christian~151626">Jalon Christian</a></p>
-                                             <p class="character">Hurut</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="11" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/benjamin-patterson~157237">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Benjamin Patterson"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/benjamin-patterson~157237">Benjamin Patterson</a></p>
-                                             <p class="character">Skinny Teth Adam</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="12" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/odelya-halevi~157238">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Odelya Halevi"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/odelya-halevi~157238">Odelya Halevi</a></p>
-                                             <p class="character">Shiruta</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="13" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/uli-latukefu~8725">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Uli Latukefu"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/uli-latukefu~8725">Uli Latukefu</a></p>
-                                             <p class="character">The Champion</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="14" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/jennifer-holland~19057">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Jennifer Holland"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/jennifer-holland~19057">Jennifer Holland</a></p>
-                                             <p class="character">Emilia Harcourt</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="15" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/henry-winkler~23756">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Henry Winkler"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/henry-winkler~23756">Henry Winkler</a></p>
-                                             <p class="character">Uncle Al</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="16" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/chaim-girafi~82054">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Chaim Girafi"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/chaim-girafi~82054">Chaim Girafi</a></p>
-                                             <p class="character">Djau</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="17" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/sharon-gee~39067">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Sharon Gee"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/sharon-gee~39067">Sharon Gee</a></p>
-                                             <p class="character">Mrs. Farmer</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="18" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/stephan-jones~60917">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Stephan Jones"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/stephan-jones~60917">Stephan Jones</a></p>
-                                             <p class="character">Commander</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="19" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/a-manuel-miranda~157239">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="A. Manuel Miranda"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/a-manuel-miranda~157239">A. Manuel Miranda</a></p>
-                                             <p class="character">Ancient Mine Soldier</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="20" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/djimon-hounsou~4534">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Djimon Hounsou"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/djimon-hounsou~4534">Djimon Hounsou</a></p>
-                                             <p class="character">Wizard</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="21" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/raj-kala~30592">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Raj Kala"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/raj-kala~30592">Raj Kala</a></p>
-                                             <p class="character">Wizard #1</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="22" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/e-lloyd-napier~157240">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="E. Lloyd Napier"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/e-lloyd-napier~157240">E. Lloyd Napier</a></p>
-                                             <p class="character">Wizard #2</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="23" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/kiara-rashawn~157241">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Kiara Rashawn"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/kiara-rashawn~157241">Kiara Rashawn</a></p>
-                                             <p class="character">Wizard #3</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="24" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/onye-eme-akwari~157242">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Onye Eme-Akwari"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/onye-eme-akwari~157242">Onye Eme-Akwari</a></p>
-                                             <p class="character">Wizard #4</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="25" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/sanna-erica~157243">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Sanna Erica"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/sanna-erica~157243">Sanna Erica</a></p>
-                                             <p class="character">Wizard #5</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="26" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 166px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="image" href="https://xemphimm.com/person/vince-canlas~21018">
-                                                <figure><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Vince Canlas"></figure>
-                                             </a>
-                                             <p><a class="name" href="https://xemphimm.com/person/vince-canlas~21018">Vince Canlas</a></p>
-                                             <p class="character">Wizard #6</p>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    
-                              <div class="slick-arrow slick-next" style="display:block">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
-                                 </svg>
-                              </div>
+                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                 </div>
+                                     
                            </div>
                         </div>
                         <h3 class="section-header">Trailer</h3>
                         <div class="trailers">
                            <div class="slick-slider slick-initialized" dir="ltr">
-                              <div class="slick-arrow slick-prev slick-disabled" style="display:block">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
-                                 </svg>
-                              </div>
+                             
                               <div class="slick-list">
-                                 <div class="slick-track" style="width: 4712px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                                    
-                                    <div data-index="15" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 248px;">
+                                 <div class="slick-track movie-trailer carousel-nav-center owl-carousel" style="width: auto; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                 
+                                 <?php $__currentLoopData = $movie_videos['results']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $trailer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                 
+                                    <div data-index="<?php echo e($key); ?>" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 248px;">
                                        <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <div class="clip">
-                                                <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg">
-                                                <div class="icon">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                                      <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                                                   </svg>
-                                                </div>
-                                             </div>
+                                          <div class="item" tabindex="-1" style="width:100%; height: 100% ;display:inline-block">
+                                             <a type="button" class="clip" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/<?php echo e($trailer['key']); ?>" data-bs-target="#myModal">
+                                                      <img style="max-height: 100%; max-width: 100%; object-fit: contain" src="https://img.youtube.com/vi/<?php echo e($trailer['key']); ?>/hqdefault.jpg">
+                                                       <div class="icon">
+                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                         <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                                                      </svg>
+
+                                                   </div>
+                                                
+                                             </a>
+                                            
                                           </div>
                                        </div>
                                     </div>
-                                    <div data-index="16" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 248px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <div class="clip">
-                                                <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg">
-                                                <div class="icon">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                                      <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                                                   </svg>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="17" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 248px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <div class="clip">
-                                                <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg">
-                                                <div class="icon">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                                      <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                                                   </svg>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="18" class="slick-slide" tabindex="-1" aria-hidden="true" style="outline: none; width: 248px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <div class="clip">
-                                                <img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg">
-                                                <div class="icon">
-                                                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                                      <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                                                   </svg>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="slick-arrow slick-next" style="display:block">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
-                                 </svg>
-                              </div>
+                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                               <div class="modal-dialog" role="document">
+                                                 <div class="modal-content">
+                                                   <div class="modal-body">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></span>
+                                                     </button>        
+                                                     <!-- 16:9 aspect ratio -->
+                                                     <div class="ratio ratio-16x9">
+                                                      <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                                                   </div>
+                                                     
+                                                   </div>
+
+                                                 </div>
+                                               </div>
+                                          </div> 
+                                 </div>   
                            </div>
                         </div>
                         <h3 class="section-header">Phim tương tự</h3>

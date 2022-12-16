@@ -1220,3 +1220,33 @@ button {
 
     width: 150px;
 }
+
+.modal-dialog {
+      max-width: 820px;
+      margin: 30px auto;
+  }
+
+.modal-body {
+  position:relative;
+  padding:0px;
+  width: 100%;
+}
+.modal{
+
+    padding-top: 100px ;
+    width: 100%;
+}
+
+
+.modal-body iframe{
+        width: 100%;;
+        margin: 0 auto;
+        display: block;
+    }
+
+
+.btn-close {
+  position:absolute;
+  right:-30px;
+  top:0;
+}

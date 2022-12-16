@@ -43,7 +43,7 @@ class CountryController extends Controller
         $country->title=$data['title'];
         $country->description=$data['description'];
         $country->status=$data['status'];
-
+        $country->slug=$data['slug'];
         $country->save();
         return redirect()->back();
 

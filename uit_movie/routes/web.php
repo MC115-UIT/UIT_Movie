@@ -24,16 +24,21 @@ use App\Http\Controllers\ApiTmdbController;
 */
 
 Route::get('/', [IndexController::class, 'home']);
-Route::get('/danhmuc/{slug}',[IndexController::class, 'category'])->name('category');
+Route::get('/home/category/{slug}',[IndexController::class, 'category'])->name('category');
+Route::get('/home/movie/{slug}',[IndexController::class, 'movie'])->name('movie');
 
-Route::get('/test_movie',[IndexController::class, 'movie'])->name('movie');
-Route::get('/test_login',[IndexController::class, 'login'])->name('login');
-Route::get('/test_signup',[IndexController::class, 'signup'])->name('signup');
+
+
+
+// Route::get('/test_movie',[IndexController::class, 'movie'])->name('movie');
+// Route::get('/test_login',[IndexController::class, 'login'])->name('login');
+// Route::get('/test_signup',[IndexController::class, 'signup'])->name('signup');
 
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 
 

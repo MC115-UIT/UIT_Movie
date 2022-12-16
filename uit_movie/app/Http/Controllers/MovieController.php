@@ -7,7 +7,7 @@ use App\Models\Movie;
 use App\Models\Genre;
 use App\Models\Category;
 use App\Models\Country;
-
+use Carbon\Carbon;
 
 
 class MovieController extends Controller
@@ -37,7 +37,6 @@ class MovieController extends Controller
         $genre=Genre::pluck('title','id');
         $country=Country::pluck('title','id');
 
-     
 
         return view('admincp.movie.form',compact('genre','category','country'));
     }
@@ -60,11 +59,15 @@ class MovieController extends Controller
         $movie->category_id=$data['category_id'];
         $movie->genre_id=$data['genre_id'];
         $movie->country_id=$data['country_id'];
+                $movie->hot=$data['hot'];
+        $movie->resolution=$data['resolution'];
 
         $movie->runtime=$data['runtime'];
         $movie->date_release=$data['date_release'];
         $movie->tmdb_id=$data['tmdb_id'];
         $movie->imdb_point=$data['imdb_point'];
+        $movie->date_create=Carbon::now('Asia/Ho_Chi_Minh');
+        $movie->date_update=Carbon::now('Asia/Ho_Chi_Minh');
 
         $get_image=$request->file('image');
 
@@ -133,6 +136,10 @@ class MovieController extends Controller
         $movie->category_id=$data['category_id'];
         $movie->genre_id=$data['genre_id'];
         $movie->country_id=$data['country_id'];
+        $movie->hot=$data['hot'];
+        $movie->resolution=$data['resolution'];
+        $movie->date_update=Carbon::now('Asia/Ho_Chi_Minh');
+
 
         $movie->runtime=$data['runtime'];
         $movie->date_release=$data['date_release'];
@@ -143,14 +150,15 @@ class MovieController extends Controller
 
 
         if($get_image){
-            if(!empty($movie->image)){
-            unlink('uploads/movie/'.$movie->image);
-            }
-            $get_name_image=$get_image->getClientOriginalName();
+            if(file_exists('uploads/movie/'.$movie->image)){
+                unlink('uploads/movie/'.$movie->image);
+            }else{
+                 $get_name_image=$get_image->getClientOriginalName();
             $name_image=current(explode('.',$get_name_image));
             $new_image=$name_image.rand(0,9999).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('uploads/movie/',$new_image);
             $movie->image=$new_image;
+            }
         }
         $movie->save();
         return redirect()->back();
@@ -168,9 +176,9 @@ class MovieController extends Controller
 
         // Movie::find($id)->delete();
         $movie=Movie::find($id);
-        if(!empty($movie->image)){
+        if(file_exists('uploads/movie/'.$movie->image)){
             unlink('uploads/movie/'.$movie->image);
-        }
+        } 
         $movie->delete(); 
         return redirect()->back();
     }

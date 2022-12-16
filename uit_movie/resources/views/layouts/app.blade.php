@@ -143,7 +143,12 @@
                 }
                 else{
                         var imdbID=$("#add-movie-input").val();
+                        var select = $('#select_api').find(":selected").val();
                         var Url = "https://api.themoviedb.org/3/movie/"+imdbID+"?api_key="+api_key+"&language=vi";
+                        if(select=="show"){
+                            Url = "https://api.themoviedb.org/3/tv/"+imdbID+"?api_key="+api_key+"&language=vi";
+                        }
+                        
                     $.ajax({
                     url: Url,
                     dataType:'json',
@@ -156,13 +161,61 @@
                         console.log(respone)
                         // alert(respone["original_title"]);
                         //var jsonobj = JSON.parse(sup);
-                        $("#slug").val(respone["original_title"]);
+                     
+                        if(select=="show"){
+                            $("#slug").val(respone["original_name"]);
+                        }
+                        else{
+                                  $("#slug").val(respone["original_title"]);
+                        }
+                      
                         $("#time-movie").val(respone["runtime"]);
                         $("#date-release").val(respone["release_date"]);
                         $("#tmdb-id").val(respone["id"]);
-                        $("#imdb-point").val(respone["vote_average"]);
+                        $("#imdb-point").val(parseFloat(respone["vote_average"]).toFixed(1));
                         $("#description").val(respone["overview"]);
                         $("#add-poster").attr('href',"https://image.tmdb.org/t/p/w500/" + respone["poster_path"]); 
+
+                        // url_credit = "https://api.themoviedb.org/3/movie/"+imdbID+"/credits?api_key="+api_key+"&language=en-US";
+
+                        // $.ajax({
+
+                        //    url : url_credit,
+                        //    dataType:'json',
+                        //     type: "GET",
+                        //     contentType: "application/json; charset=utf-8",
+                        //      processData: false,
+                        //     cache: false,
+                        //     success: function (respone_credit){
+
+                        //     console.log(respone_credit['crew'])
+
+                        //     var l_director = new  Array();
+                        //     var l_writing = new Array()
+
+                        //         $.each(respone_credit["crew"], function(index){
+                        //                 if(respone_credit["crew"][index]['job']=="Director"){
+
+                                                
+                        //                         l_director.push(respone_credit["crew"][index]['name']);
+                                       
+                        //                 }
+                        //                 if(respone_credit["crew"][index]['job']=="Novel" || respone_credit["crew"][index]['job']=="Story"){ 
+
+                                       
+                        //                         l_writing.push(respone_credit["crew"][index]['name']);
+                        //                 }
+                        //         })
+
+                        //         console.log(l_director.join(', '))
+                        //         console.log(l_writing.join(', '))
+
+
+                        //     },
+                        //      error: function (xhr) {
+                        //         alert('Không tìm thấy thông tin');
+                        //     }
+                        // })
                        
                     },
                     error: function (xhr) {

@@ -41,7 +41,7 @@ class GenreController extends Controller
         $genre->title=$data['title'];
         $genre->description=$data['description'];
         $genre->status=$data['status'];
-
+        $genre->slug=$data['slug'];
         $genre->save();
         return redirect()->back();
 

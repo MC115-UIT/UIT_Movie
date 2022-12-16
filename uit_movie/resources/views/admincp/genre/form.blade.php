@@ -33,12 +33,12 @@
                         </div>
                         <div class='form-group'>
                             {!!Form::label('Active','Active',[])!!}
-                            {!!Form::select('status',['1'=>"Hien thi", '0'=>'Khong'],isset($genre)?$genre->status:'',['class'=>'form-control my-2'])!!}        
+                            {!!Form::select('status',['1'=>"Hiển thị", '0'=>'Không'],isset($genre)?$genre->status:'',['class'=>'form-control my-2'])!!}        
                         </div>
                     @if(!isset($genre))
-                        {!!Form::submit('Them du lieu',['class'=>'btn btn-success my-2'])!!}
+                        {!!Form::submit('Thêm dữ liệu',['class'=>'btn btn-success my-2'])!!}
                     @else
-                        {!!Form::submit('Cap nhat',['class'=>'btn btn-success my-2'])!!}
+                        {!!Form::submit('Cập nhật',['class'=>'btn btn-success my-2'])!!}
                     @endif
                     {!!Form::close()!!}
                 </div>
@@ -63,16 +63,16 @@
                         <td>{{$cate->description}}</td>
                         <td>
                             @if($cate->status)
-                                Hien thi
+                                Hiển thị
                             @else
-                                Khong hien thi
+                                Không hiển thị
                             @endif
                         </td>
                         <td class="d-flex">
-                            {!!Form::open(['method'=>'DELETE','route'=>['genre.destroy',$cate->id],'onsubmit'=>'return confirm("Xoa hay khong xoa")'])!!}
-                                {!!Form::submit('Xoa',['class'=>'btn btn-danger'])!!}
+                            {!!Form::open(['method'=>'DELETE','route'=>['genre.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không xóa")'])!!}
+                                {!!Form::submit('Xóa',['class'=>'btn btn-danger'])!!}
                             {!!Form::close()!!}
-                            <a href="{{route('genre.edit',$cate->id)}}" class="btn btn-warning">Sua</a>
+                            <a href="{{route('genre.edit',$cate->id)}}" class="btn btn-warning">Sửa</a>
                         </td>
                     </tr>
                     @endforeach

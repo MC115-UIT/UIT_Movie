@@ -40,13 +40,13 @@
                         <div class='form-group'>
                             <?php echo Form::label('Active','Active',[]); ?>
 
-                            <?php echo Form::select('status',['1'=>"Hien thi", '0'=>'Khong'],isset($country)?$country->status:'',['class'=>'form-control my-2']); ?>        
+                            <?php echo Form::select('status',['1'=>"Hiển thị", '0'=>'Không'],isset($country)?$country->status:'',['class'=>'form-control my-2']); ?>        
                         </div>
                     <?php if(!isset($country)): ?>
-                        <?php echo Form::submit('Them du lieu',['class'=>'btn btn-success my-2']); ?>
+                        <?php echo Form::submit('Thêm dữ liệu',['class'=>'btn btn-success my-2']); ?>
 
                     <?php else: ?>
-                        <?php echo Form::submit('Cap nhat',['class'=>'btn btn-success my-2']); ?>
+                        <?php echo Form::submit('Cập nhật',['class'=>'btn btn-success my-2']); ?>
 
                     <?php endif; ?>
                     <?php echo Form::close(); ?>
@@ -73,19 +73,19 @@
                         <td><?php echo e($cate->slug); ?></td>
                         <td>
                             <?php if($cate->status): ?>
-                                Hien thi
+                                Hiển thị
                             <?php else: ?>
-                                Khong hien thi
+                                Không hiển thị
                             <?php endif; ?>
                         </td>
                         <td class="d-flex">
-                            <?php echo Form::open(['method'=>'DELETE','route'=>['country.destroy',$cate->id],'onsubmit'=>'return confirm("Xoa hay khong xoa")']); ?>
+                            <?php echo Form::open(['method'=>'DELETE','route'=>['country.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không xóa")']); ?>
 
-                                <?php echo Form::submit('Xoa',['class'=>'btn btn-danger']); ?>
+                                <?php echo Form::submit('Xóa',['class'=>'btn btn-danger']); ?>
 
                             <?php echo Form::close(); ?>
 
-                            <a href="<?php echo e(route('country.edit',$cate->id)); ?>" class="btn btn-warning">Sua</a>
+                            <a href="<?php echo e(route('country.edit',$cate->id)); ?>" class="btn btn-warning">Sửa</a>
                         </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -355,8 +355,9 @@
                           <div class="select">
                              <select>
                                 <option selected="" value="">- Tất cả -</option>
-                                <option value="movie">Phim Lẻ</option>
-                                <option value="show">Phim Bộ</option>
+                                 @foreach($category as $key => $cate)
+                                    <option value="{{$cate->slug}}">{{$cate->title}}</option>
+                                @endforeach
                              </select>
                           </div>
                        </div>
@@ -369,39 +370,9 @@
                           <div class="select">
                              <select>
                                 <option selected="" value="">- Tất cả -</option>
-                                <option value="am-nhac">Âm nhạc</option>
-                                <option value="bi-an">Bí ẩn</option>
-                                <option value="chien-tranh">Chiến tranh</option>
-                                <option value="chien-tranh-chinh-tri">
-                                   Chiến tranh &amp; Chính trị
-                                </option>
-                                <option value="chinh-kich">Chính kịch</option>
-                                <option value="gia-dinh">Gia đình</option>
-                                <option value="giat-gan">Giật gân</option>
-                                <option value="hai">Hài</option>
-                                <option value="hanh-dong">Hành động</option>
-                                <option value="hanh-dong-phieu-luu">
-                                   Hành động &amp; Phiêu lưu
-                                </option>
-                                <option value="hoat-hinh">Hoạt hình</option>
-                                <option value="kinh-di">Kinh dị</option>
-                                <option value="ky-ao">Kỳ ảo</option>
-                                <option value="lang-man">Lãng mạn</option>
-                                <option value="lich-su">Lịch sử</option>
-                                <option value="noi-chuyen">Nói chuyện</option>
-                                <option value="phieu-luu">Phiêu lưu</option>
-                                <option value="phim-dai-ky">Phim dài kỳ</option>
-                                <option value="tai-lieu">Tài liệu</option>
-                                <option value="thuc-te">Thực tế</option>
-                                <option value="tin-tuc">Tin tức</option>
-                                <option value="toi-pham">Tội phạm</option>
-                                <option value="tre-em">Trẻ em</option>
-                                <option value="truyen-hinh">Truyền hình</option>
-                                <option value="vien-tay">Viễn Tây</option>
-                                <option value="vien-tuong">Viễn tưởng</option>
-                                <option value="vien-tuong-than-thoai">
-                                   Viễn tưởng &amp; Thần thoại
-                                </option>
+                                 @foreach($genre as $key => $gen)
+                                    <option value="{{$gen->slug}}">{{$gen->title}}</option>
+                                @endforeach
                              </select>
                           </div>
                        </div>
@@ -414,56 +385,9 @@
                           <div class="select">
                              <select>
                                 <option selected="" value="">- Tất cả -</option>
-                                <option value="US">Mỹ</option>
-                                <option value="KR">Hàn Quốc</option>
-                                <option value="GB">Anh</option>
-                                <option value="FR">Pháp</option>
-                                <option value="CA">Canada</option>
-                                <option value="HK">Hồng Kông</option>
-                                <option value="JP">Nhật Bản</option>
-                                <option value="CN">Trung Quốc</option>
-                                <option value="TW">Đài Loan</option>
-                                <option value="IN">Ấn Độ</option>
-                                <option value="TH">Thái Lan</option>
-                                <option value="AU">Úc</option>
-                                <option value="VN">Việt Nam</option>
-                                <option value="DE">Đức</option>
-                                <option value="SE">Thụy Điển</option>
-                                <option value="IT">Ý</option>
-                                <option value="HU">Hungary</option>
-                                <option value="IE">Ai-len</option>
-                                <option value="MT">Malta</option>
-                                <option value="NZ">New Zealand</option>
-                                <option value="RU">Nga</option>
-                                <option value="IS">Iceland</option>
-                                <option value="FI">Phần Lan</option>
-                                <option value="MW">Ma-la-uy</option>
-                                <option value="CO">Colombia</option>
-                                <option value="DK">Đan Mạch</option>
-                                <option value="BE">Bỉ</option>
-                                <option value="ES">Tây Ban Nha</option>
-                                <option value="AR">Argentina</option>
-                                <option value="NL">Hà Lan</option>
-                                <option value="NO">Na Uy</option>
-                                <option value="SG">Singapore</option>
-                                <option value="PL">Ba Lan</option>
-                                <option value="MY">Malaysia</option>
-                                <option value="ID">Indonesia</option>
-                                <option value="IR">Iran</option>
-                                <option value="PR">Puerto Rico</option>
-                                <option value="NP">Nepal</option>
-                                <option value="BG">Bulgaria</option>
-                                <option value="KH">Campuchia</option>
-                                <option value="PH">Philippines</option>
-                                <option value="TR">Thổ Nhĩ Kỳ</option>
-                                <option value="MA">Morocco</option>
-                                <option value="BR">Brazil</option>
-                                <option value="MX">Mexico</option>
-                                <option value="CZ">Séc</option>
-                                <option value="RO">Rumani</option>
-                                <option value="PS">Palestine</option>
-                                <option value="KZ">Kazakhstan</option>
-                                <option value="ZA">Nam Phi</option>
+                                @foreach($country as $key => $ct)
+                                    <option value="{{$ct->slug}}">{{$ct->title}}</option>
+                                @endforeach
                              </select>
                           </div>
                        </div>

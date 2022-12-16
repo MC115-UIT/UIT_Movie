@@ -7,8 +7,14 @@
             <div class="card">
                 <a href="{{route('movie.index')}}" class="btn btn-primary">Liệt kê phim</a>
                 <div class="card-header">Quản lí Phim</div>
-                <div class="d-flex justify-content-between col-4 my-2 ms-2">
+                <div class="d-flex justify-content-between col-6 my-2 ms-2 align-items-center">
                                     <input type="text" name="" id="add-movie-input" title="Thêm nhanh" placeholder="Nhập tmdb ID">
+                                    <div class="select">
+                                         <select id="select_api">
+                                            <option selected="" value="movie">Phim lẻ</option>
+                                            <option value="show">Phim dài tập/Show</option>                            
+                                        </select>
+                                    </div>
                                     <button id="add-movie" class="btn btn-primary">Thêm nhanh thông tin phim</button>
                 </div>
                 <div class="card-body">
@@ -58,8 +64,22 @@
 
                         <div class='form-group'>
                             {!!Form::label('Active','Active',[])!!}
-                            {!!Form::select('status',['1'=>"Hien thi", '0'=>'Khong'],isset($movie)?$movie->status:'',['class'=>'form-control my-2'])!!}        
+                            {!!Form::select('status',['1'=>"Hiển thị", '0'=>'Không'],isset($movie)?$movie->status:'',['class'=>'form-control my-2'])!!}        
                         </div>
+                         <div class='form-group'>
+                            {!!Form::label('Hot','Hot',[])!!}
+                            {!!Form::select('hot',['1'=>"Phim hot", '0'=>'Không'],isset($movie)?$movie->hot:'',['class'=>'form-control my-2'])!!}        
+                        </div>
+
+                         <div class='form-group'>
+                            {!!Form::label('resolution','Quality',[])!!}
+                            {!!Form::select('resolution',['0'=>"HD", '1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD'],isset($movie)?$movie->resolution:'',['class'=>'form-control my-2'])!!}        
+                        </div>
+                        <div class='form-group'>
+                            {!!Form::label('subtitle','Subtitle',[])!!}
+                            {!!Form::select('subtitle',['0'=>"Thuyết Minh", '1'=>'Phụ đề'],isset($movie)?$movie->subtitle:'',['class'=>'form-control my-2'])!!}        
+                        </div>
+
                         <div class='form-group'>
                             {!!Form::label('Category','Category',[])!!}
                             {!!Form::select('category_id',$category,isset($movie)?$movie->category_id:'',['class'=>'form-control my-2'])!!}        
@@ -81,9 +101,9 @@
                             <a href="" id="add-poster" download target="_blank" rel="noopener noreferrer">Tải nhanh poster phim!</a>
                         </div>
                     @if(!isset($movie))
-                        {!!Form::submit('Them du lieu',['class'=>'btn btn-success my-2'])!!}
+                        {!!Form::submit('Thêm dữ liệu',['class'=>'btn btn-success my-2'])!!}
                     @else
-                        {!!Form::submit('Cap nhat',['class'=>'btn btn-success my-2'])!!}
+                        {!!Form::submit('Cập nhật',['class'=>'btn btn-success my-2'])!!}
                     @endif
                     {!!Form::close()!!}
                 </div>
