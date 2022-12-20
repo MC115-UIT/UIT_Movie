@@ -17,7 +17,7 @@
           <a class="nav-link " href="<?php echo e(route('country.create')); ?>">Quốc gia</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="<?php echo e(route('movie.create')); ?>">Phim</a>
+          <a class="nav-link " href="<?php echo e(route('movie.index')); ?>">Phim</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="<?php echo e(route('episode.create')); ?>">Tập phim</a>

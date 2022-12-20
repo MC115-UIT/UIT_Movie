@@ -43,7 +43,7 @@
                     {!!Form::close()!!}
                 </div>
             </div>
-            <table class="table">
+            <table class="table movie-table table-responesive" >
                 <thead>
                     <tr>
                         <th scope="col">#</th>

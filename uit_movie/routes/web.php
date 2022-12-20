@@ -23,9 +23,21 @@ use App\Http\Controllers\ApiTmdbController;
 |
 */
 
-Route::get('/', [IndexController::class, 'home']);
+Route::get('/home', [IndexController::class, 'home'])->name('home');
 Route::get('/home/category/{slug}',[IndexController::class, 'category'])->name('category');
 Route::get('/home/movie/{slug}',[IndexController::class, 'movie'])->name('movie');
+Route::get('/home/genre/{slug}',[IndexController::class, 'genre'])->name('genre');
+Route::get('/home/watch/{slug}/{ep}',[IndexController::class, 'watch'])->name('watch');
+
+
+
+
+
+Route::get('/search',[IndexController::class, 'timkiem'])->name('tim-kiem');
+Route::get('/filter',[IndexController::class, 'filter'])->name('filter_movie');
+
+
+
 
 
 
@@ -37,7 +49,7 @@ Route::get('/home/movie/{slug}',[IndexController::class, 'movie'])->name('movie'
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/admin', [HomeController::class, 'index'])->name('admin'); //'home'
 
 
 
@@ -49,6 +61,8 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 Route::resource('episode', EpisodeController::class);
+Route::get('select-movie',[EpisodeController::class, 'select_movie'])->name('select-movie');
+
 
 Route::post('resorting',[CategoryController::class,'resorting'])->name('resorting');
 

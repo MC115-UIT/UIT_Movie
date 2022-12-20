@@ -53,7 +53,7 @@
 
                 </div>
             </div>
-            <table class="table">
+            <table class="table movie-table" >
                 <thead>
                     <tr>
                         <th scope="col">#</th>

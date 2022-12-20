@@ -43,7 +43,14 @@
                         </div>
 
 
-
+                          <div class='form-group'>
+                            {!!Form::label('sotap','Eposides',[])!!}
+                            {!!Form::text('sotap',isset($movie)?$movie->sotap:'',['style'=>'resize:none','class'=>'form-control my-2'])!!}        
+                        </div>
+                        <div class='form-group'>
+                            {!!Form::label('thuocphim','Type of Movie',[])!!}
+                            {!!Form::select('thuocphim',['phimle'=>'Phim lẻ 1 tập','phimbo'=>'Phim nhiều tập'],isset($movie)?$movie->thuocphim:'',['style'=>'resize:none','class'=>'form-control my-2'])!!}        
+                        </div>
                         <div class='form-group'>
                             {!!Form::label('time','Time',[])!!}
                             {!!Form::text('runtime',isset($movie)?$movie->runtime:'',['style'=>'resize:none','class'=>'form-control my-2','id'=>'time-movie'])!!}        
@@ -73,7 +80,7 @@
 
                          <div class='form-group'>
                             {!!Form::label('resolution','Quality',[])!!}
-                            {!!Form::select('resolution',['0'=>"HD", '1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD'],isset($movie)?$movie->resolution:'',['class'=>'form-control my-2'])!!}        
+                            {!!Form::select('resolution',['0'=>"HD", '1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD','5'=>'Trailer'],isset($movie)?$movie->resolution:'',['class'=>'form-control my-2'])!!}        
                         </div>
                         <div class='form-group'>
                             {!!Form::label('subtitle','Subtitle',[])!!}
@@ -85,8 +92,18 @@
                             {!!Form::select('category_id',$category,isset($movie)?$movie->category_id:'',['class'=>'form-control my-2'])!!}        
                         </div>
                         <div class='form-group'>
-                            {!!Form::label('Genre','Genre',[])!!}
-                            {!!Form::select('genre_id',$genre,isset($movie)?$movie->genre_id:'',['class'=>'form-control my-2'])!!}        
+                            {!!Form::label('Genre','Genre',[])!!}<br>
+                            <!-- {!!Form::select('genre_id',$genre,isset($movie)?$movie->genre_id:'',['class'=>'form-control my-2'])!!} -->
+                            @foreach($list_genre as $key => $gen)
+                                @if(isset($movie))
+                                       {!!Form::checkbox('genre[]',$gen->id,  isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false)!!}
+                                @else
+                                    {!!Form::checkbox('genre[]',$gen->id,  )!!}
+                                @endif
+                                
+                                {!!Form::label('genre',$gen->title)!!}
+                            @endforeach
+
                         </div>
                         <div class='form-group'>
                             {!!Form::label('Country','Country',[])!!}

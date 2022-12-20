@@ -29,22 +29,32 @@
         <div class="container-fluid ">
             <div class="nav">
                 <a href="#" class="logo ms-3">
-                    <i class='bx bx-movie-play bx-tada main-color'></i>Fl<span class="main-color">i</span>x
+                    <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T MOVIE
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#">Home</a></li>
-                    <!-- <li><a href="#">Genre</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Series</a></li> -->
-                    <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                   <div class="search-container form-group">
+                    <form action="<?php echo e(route('tim-kiem')); ?>" method="GET" class="d-flex form-search">
+                        <li class="search-box mb-2">
+                                    <input type="text" name="search" id="search-input" placeholder="Search movie" autocomplete="off">
+                                   <button class="btn btn-search" >                                  
+                                         <i class='bx bx-search-alt'>
+                                         </i>
+                                     </button>
+          
+                        </li>
+                    </form>
+                         <ul class="list-group" id="result-search" style="display:none; position: absolute;">
+                            
+                        </ul>
+                    </div>
+                     <li><a href="<?php echo e(route('home')); ?>">Home</a></li>
+
+                     <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li class="mega"><a title="<?php echo e($cate->title); ?>" href="<?php echo e(route('category',$cate->slug)); ?>"><?php echo e($cate->title); ?></a></li>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <li><a href="#">About</a></li>
-                    <li class="search-box">
-                        <input type="search" name="" id="search-input" placeholder="Search movie">
-                        <i class='bx bx-search-alt'></i>
-                    </li>
-                    <li class="mt-2">
+               
+                    <li>
                         <a href="#" class="btn btn-hover">
                             <span>Sign in</span>
                         </a>
@@ -185,23 +195,37 @@
         <div class="top-movies-slide">
             <div class="owl-carousel" id="top-movies-slide">
                 <!-- MOVIE ITEM -->
+                <?php $__currentLoopData = $movie_hot; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $mov): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/series/supergirl.jpg')); ?>" alt="">
+                    <img src="<?php echo e(asset('uploads/movie/'.$mov->image)); ?>" alt="">
                     <div class="movie-item-content">
                         <div class="movie-item-title">
-                            Supergirl
+                            <?php echo e($mov->title); ?>
+
                         </div>
                         <div class="movie-infos">
                             <div class="movie-info">
                                 <i class="bx bxs-star"></i>
-                                <span>9.5</span>
+                                <span><?php echo e($mov->imdb_point); ?></span>
                             </div>
                             <div class="movie-info">
                                 <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
+                                <span><?php echo e($mov->runtime); ?> mins</span>
                             </div>
                             <div class="movie-info">
+                            <?php if($mov->resolution==0): ?>
                                 <span>HD</span>
+                            <?php elseif($mov->resolution==1): ?>
+                                <span>SD</span>
+                            <?php elseif($mov->resolution==2): ?>
+                                <span>HDCam</span>
+                            <?php elseif($mov->resolution==3): ?>
+                                <span>Cam</span>
+                            <?php elseif($mov->resolution==4): ?>
+                                <span>FullHD</span>
+                            <?php elseif($mov->resolution==5): ?>
+                                <span>Trailer</span>
+                            <?php endif; ?>
                             </div>
                             <div class="movie-info">
                                 <span>16+</span>
@@ -209,136 +233,10 @@
                         </div>
                     </div>
                 </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <!-- END MOVIE ITEM -->
                 <!-- MOVIE ITEM -->
-                <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/movies/captain-marvel.png')); ?>" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Captain Marvel
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/cartoons/demon-slayer.jpg')); ?>" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Infinity Train
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/movies/blood-shot.jpg')); ?>" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Bloodshot
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/series/wanda.png')); ?>" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Wanda Vision
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <div class="movie-item">
-                    <img src="<?php echo e(asset('./images/movies/bat-man.jpg')); ?>" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            The Dark Knight
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- END MOVIE ITEM -->
             </div>
         </div>
@@ -347,16 +245,17 @@
     <!-- END HERO SECTION -->
 
     <div class="section-film">
-        <div class="columns is-multiline is-mobile title_filters__2FjQh d-flex mt-0 mx-auto justify-content-between pb-0">
+        <form method="GET" action="<?php echo e(route('filter_movie')); ?>">
+           <div class="columns is-multiline is-mobile title_filters__2FjQh d-flex mt-0 mx-auto justify-content-between pb-0 align-items-center">
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Loại phim:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="">- Tất cả -</option>
+                             <select class="form-control" name="category">
+                                <option selected="" value="0">- Tất cả -</option>
                                  <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($cate->slug); ?>"><?php echo e($cate->title); ?></option>
+                            <option value="<?php echo e($cate->id); ?>" <?php echo e(( isset($_GET['category'])  && $_GET['category']==$cate->id) ? 'selected' : ''); ?>><?php echo e($cate->title); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                              </select>
                           </div>
@@ -364,14 +263,16 @@
                     </div>
                  </div>
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Thể loại:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="">- Tất cả -</option>
+                             <select class="form-control" name="genre">
+                                <option selected="" value="0">- Tất cả -</option>
                                  <?php $__currentLoopData = $genre; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $gen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($gen->slug); ?>"><?php echo e($gen->title); ?></option>
+                                    
+                                   
+                                    <option value="<?php echo e($gen->id); ?>" <?php echo e(( isset($_GET['genre']) && $_GET['genre']==$gen->id) ? 'selected' : ''); ?> ><?php echo e($gen->title); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                              </select>
                           </div>
@@ -379,14 +280,14 @@
                     </div>
                  </div>
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Quốc gia:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="">- Tất cả -</option>
+                             <select class="form-control" name="country">
+                                <option selected="" value="0">- Tất cả -</option>
                                 <?php $__currentLoopData = $country; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $ct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($ct->slug); ?>"><?php echo e($ct->title); ?></option>
+                                    <option value="<?php echo e($ct->id); ?>" <?php echo e(( isset($_GET['country'])  && $_GET['country']==$ct->id) ? 'selected' : ''); ?> ><?php echo e($ct->title); ?></option>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                              </select>
                           </div>
@@ -394,65 +295,70 @@
                     </div>
                  </div>
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Năm:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="">- Tất cả -</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                                <option value="2015">2015</option>
-                                <option value="2014">2014</option>
-                                <option value="2013">2013</option>
-                                <option value="2012">2012</option>
-                                <option value="-2012">Trước 2012</option>
+                             <select class="form-control" name="year">
+                                <option selected="" value="0">- Tất cả -</option>
+                                <option value="2022" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2022) ? 'selected' : ''); ?>>2022</option>
+                                <option value="2021" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2021) ? 'selected' : ''); ?>>2021</option>
+                                <option value="2020" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2020) ? 'selected' : ''); ?>>2020</option>
+                                <option value="2019" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2019) ? 'selected' : ''); ?>>2019</option>
+                                <option value="2018" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2018) ? 'selected' : ''); ?>>2018</option>
+                                <option value="2017" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2017) ? 'selected' : ''); ?>>2017</option>
+                                <option value="2016" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2016) ? 'selected' : ''); ?>>2016</option>
+                                <option value="2015" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2015) ? 'selected' : ''); ?>>2015</option>
+                                <option value="2014" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2014) ? 'selected' : ''); ?>>2014</option>
+                                <option value="2013" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2013) ? 'selected' : ''); ?>>2013</option>
+                                <option value="2012" <?php echo e(( isset($_GET['year'])  && $_GET['year']==2012) ? 'selected' : ''); ?>>2012</option>
+                                <option value="-2012" <?php echo e(( isset($_GET['year'])  && $_GET['year']==-2012) ? 'selected' : ''); ?>>Trước 2012</option>
                              </select>
                           </div>
                        </div>
                     </div>
                  </div>
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Thời lượng:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="">- Tất cả -</option>
-                                <option value="0-30">Dưới 30 phút</option>
-                                <option value="30-60">30&#x27; - 1 tiếng</option>
-                                <option value="60-90">1 - 1.5 tiếng</option>
-                                <option value="90-120">1.5 - 2 tiếng</option>
-                                <option value="120-150">2 - 2.5 tiếng</option>
-                                <option value="150-180">2.5 - 3 tiếng</option>
-                                <option value="180-0">Trên 3 tiếng</option>
+                             <select class="form-control" name="runtime">
+                        <option selected="" value="0">- Tất cả -</option>
+                        <option value="1" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==1) ? 'selected' : ''); ?>>Dưới 30 phút</option>
+                        <option value="2" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==2) ? 'selected' : ''); ?>>30&#x27; - 1 tiếng</option>
+                        <option value="3" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==3) ? 'selected' : ''); ?>>1 - 1.5 tiếng</option>
+                        <option value="4" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==4) ? 'selected' : ''); ?>>1.5 - 2 tiếng</option>
+                        <option value="5" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==5) ? 'selected' : ''); ?>>2 - 2.5 tiếng</option>
+                        <option value="6" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==6) ? 'selected' : ''); ?>>2.5 - 3 tiếng</option>
+                        <option value="7" <?php echo e(( isset($_GET['runtime'])  && $_GET['runtime']==7) ? 'selected' : ''); ?>>Trên 3 tiếng</option>
                              </select>
                           </div>
                        </div>
                     </div>
                  </div>
                  <div class="column is-6-mobile mx-auto p-3">
-                    <div class="field">
+                    <div class="field form-group">
                        <label class="label">Sắp xếp:</label>
                        <div class="control">
                           <div class="select">
-                             <select>
-                                <option selected="" value="updated">
+                             <select class="form-control" name="order">
+                                <option selected="" value="0">- Mặc định -</option>
+                                <option value="updated" <?php echo e(( isset($_GET['order'])  && $_GET['order']=="updated") ? 'selected' : ''); ?>>
                                    Ngày cập nhật
                                 </option>
-                                <option value="publishDate">Ngày phát hành</option>
-                                <option value="rating">Điểm đánh giá</option>
+                                <option value="publishDate" <?php echo e(( isset($_GET['order'])  && $_GET['order']=="publishDate") ? 'selected' : ''); ?>>Ngày phát hành</option>
+                                <option value="rating" <?php echo e(( isset($_GET['order'])  && $_GET['order']=="rating") ? 'selected' : ''); ?>>Điểm đánh giá</option>
                              </select>
                           </div>
                        </div>
                     </div>
                  </div>
+                 <div class="form-group mt-4">
+                        <input type="submit" class="btn bg-warning bg-gradient btn-filter" value="Lọc phim">
+                 </div>
             </div>
+        </form>
         <?php echo $__env->yieldContent('content'); ?>
     </div>
 
@@ -641,6 +547,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- APP SCRIPT -->
     <script src="<?php echo e(asset('./js/app.js')); ?>"></script>
+
+    <script type="text/javascript">
+                $(document).ready(function(){
+                    $('#search-input').keyup(function(){
+                        // alert('eeee');
+                        $('#result-search').html('');
+                        var search = $("#search-input").val();
+
+                        if(search !=''){
+                            $('#result-search').css('display','block');
+                            var expression = new RegExp(search,"i");
+                                 console.log(expression);
+
+                            $.getJSON('/json/movies.json',function(data){
+                                console.log(data);
+                                $.each(data, function(key,value){
+                                    if(value.title.search(expression) != -1 || value.description.search(expression)!= -1 ){
+
+                                        $('#result-search').append('<li style="cursor:pointer; display: flex; max-height: auto;color: #ffffff; background: transparent; background-color: #2d2e37;" class="list-group-item link-class width="100"  "><img src="/uploads/movie/'+value.image+'" height="100" width="100" class="" /><div style="flex-direction: column; margin-left: 10px;"><h4 width="100%">'+value.title+'</h4><span style="display: -webkit-box; max-height: 8.2rem; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; white-space: normal; -webkit-line-clamp: 5; line-height: 1.6rem;" class="text-muted">|'+value.description+'</span></div></li>')
+                                    }
+                                });
+                            });
+
+                        }else{
+                            $('#result-search').css('display','none');
+                        }
+
+                    })
+
+
+                    $('#result-search').on('click','li',function(){
+                        var click_text = $(this).text().split('|');
+
+                        $('#search-input').val($.trim(click_text[0]));
+
+                        $('#result-search').html('');   
+                        $('#result-search').css('display','none');  
+
+                    })
+                })
+    </script>
+  
+
 
 </body>
 

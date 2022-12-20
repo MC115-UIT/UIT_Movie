@@ -1,0 +1,401 @@
+
+
+/*Main*/
+
+.breadcrumbs {
+    background: #181818;
+}
+.breadcrumbs {
+    margin: 10px 0 10px 0;
+    overflow: hidden;
+    padding: 5px 10px;
+    list-style: none;
+    background-color: #111;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.breadcrumbs a {
+    
+    text-transform: uppercase;
+    text-decoration: none;
+    outline: none;
+    display: block;
+    float: left;
+    color: #337ab7;
+    font-size: 20px;
+    line-height: 36px;
+    padding: 0 10px 0 10px;
+    position: relative;
+    text-transform: uppercase;
+}
+.breadcrumbs a:after {
+    content: '/';
+    position: absolute;
+    margin-left: 5px;
+    height: 36px;
+}
+.breadcrumbs .active {
+    font-size: 19px;
+    text-decoration: none;
+    outline: none;
+    display: block;
+    float: left;
+    color: #ccc;
+    padding: 0 10px 0 10px;
+    position: relative;
+    text-align: center;
+}
+
+.breadcrumb>li{
+    display: inline-block;
+}
+
+.video-btn {
+    font-size: 13px;
+    padding: 3px 5px;
+    margin: 5px 0 0 5px;
+    color: #ffffff;
+    background-color: #2E2E2E;
+    border-radius: 2px;
+    float: right;
+    cursor: pointer;
+    position: relative;
+    z-index: 9;
+    font-weight: bold;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0,0);
+}
+
+.video-btn i {
+    padding-right: 5px;
+}
+
+#btn_lightbulb::after {
+    content: "Tắt đèn";
+}
+
+#btn_autonext.active i {
+    color: #fff;
+}
+
+.video-btn i {
+    padding-right: 5px;
+}
+
+#btn_autonext.active::after {
+    content: "Tự chuyển tập: Bật";
+}
+#btn_autonext::after {
+    content: "Tự chuyển tập: Tắt";
+}
+
+#fb-like-fanpage {
+    padding: 3px 0px;
+    margin: 5px 0 0 0px;
+    float: left;
+    position: relative;
+    z-index: 9;
+}
+
+
+
+.fb_iframe_widget {
+    display: inline-block;
+    position: relative;
+}
+
+.fb-like {
+    overflow: hidden;
+}
+
+
+.mp-tips {
+    color: #fff;
+}
+
+.mp-tips {
+    color: #FDB813;
+    margin-bottom: 10px;
+    font-size: 15px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+ul.server-backup {
+    border-top: solid 1px #555;
+    padding: 18px 0 15px;
+    clear: both;
+    overflow: hidden;
+}
+
+
+.episodes .list-episode {
+    margin: 0;
+}
+
+#page-info .latest-episode>a:hover, .list-episode>a:hover, .list-episode>a.current, ul.server-backup li span.active, ul.server-backup li span:hover {
+    background: #c58560;
+}
+
+
+.list-episode>a:hover, .list-episode>a.current {
+    background: #ff9601;
+    color: #fff;
+}
+
+.list-episode>a {
+    float: left;
+    margin: 0 5px 15px 5px;
+    padding: 7px;
+    background: #3a3a3a;
+    color: #fdfdfd;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+a, a:focus, a:hover {
+    text-decoration: none;
+}
+
+ul.server-backup {
+    border-top: solid 1px #555;
+    padding: 18px 0 15px;
+    clear: both;
+    overflow: hidden;
+}
+
+/*share + bst*/
+
+
+
+.level-item {
+    margin-right: 4rem;
+
+}
+
+.fa-solid, .fas {
+    margin-right: 0.5em;
+}
+.level-left {
+
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tt-details .genres {
+    margin-bottom: 3.5em;
+}
+
+
+
+
+.level-item {
+    align-items: center;
+    display: inline-block;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+}
+
+.button {
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    color: #363636;
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(0.5em - 1px) 1em;
+    text-align: center;
+    white-space: nowrap;
+}
+.button.is-link {
+    height: auto;
+    background-color: #485fc7;
+    border-color: transparent;
+    color: #fff;
+}
+
+.fa-brands, .fab {
+    font-weight: 400;
+}
+
+.fa-brands, .fab {
+    font-family: "Font Awesome 6 Brands";
+}
+.fa-brands, .fab {
+    margin-right: 0.5em;
+}
+.fa-facebook-square:before, .fa-square-facebook:before {
+    content: "\f082";
+}
+
+.button, .file-cta, .file-name, .input, .pagination-ellipsis, .pagination-link, .pagination-next, .pagination-previous, .select select, .textarea {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    display: inline-flex;
+    font-size: 1rem;
+    height: 2.5em;
+    justify-content: flex-start;
+    line-height: 1.5;
+    padding: calc(0.5em - 1px) calc(0.75em - 1px);
+    position: relative;
+    vertical-align: top;
+}
+
+
+@media (min-width: 550px) {
+    :root {
+
+        /**
+         * typography
+         */
+    
+        --fs-1: 42px;
+    
+      }
+
+      .container {
+        max-width: 540px;
+        margin-inline: auto;
+      }
+      .detail-subtitle { --fs-5: 22px; }
+
+      .detail-title { --fs-1: 46px; }
+}
+
+
+/**
+ * responsive for large than 768px screen
+ */
+
+ @media (min-width: 768px) {
+
+    /**
+     * CUSTOM PROPERTY
+     */
+  
+    :root {
+  
+      /**
+       * typography
+       */
+  
+      --fs-2: 36px;
+  
+    }
+  
+  
+  
+    /**
+     * REUSED STYLE
+     */
+  
+    .container { max-width: 720px; }
+  
+    /**
+     * MOVIE DETAIL
+     */
+  
+    .detail-subtitle { --fs-5: 26px; }
+  
+    .detail-title { --fs-1: 50px; }
+  
+  }
+
+/**
+ * responsive for large than 992px screen
+ */
+
+@media (min-width: 992px){
+     /**
+   * MOVIE DETAIL
+   */
+   .container { max-width: 960px; }
+
+  .movie-detail { padding-bottom: 200px; }
+
+  .movie-detail .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .movie-detail-banner,
+  .details-actions { margin: 0; }
+
+  .download-btn {
+    position: absolute;
+    left: 15px;
+    bottom: -80px;
+  }
+
+}
+
+
+/**
+ * responsive for large than 1200px screen
+ */
+
+@media (min-width: 1200px) {
+     /**
+   * MOVIE DETAIL
+   */
+   :root {
+
+    /**
+     * typography
+     */
+
+    --fs-1: 60px;
+    --fs-4: 26px;
+
+  }
+  /**
+   * REUSED STYLE
+   */
+
+  .container { max-width: 1320px; }
+  .movie-detail { padding-bottom: var(--section-padding); }
+
+  .movie-detail-content { max-width: 620px; }
+
+  .detail-title { --fs-1: 60px; }
+
+  .download-btn {
+    left: auto;
+    right: 15px;
+    bottom: 0;
+    transform: rotate(0.25turn) translateY(100%);
+    transform-origin: bottom right;
+    padding: 40px 50px;
+  }
+
+  .download-btn ion-icon {
+    font-size: 30px;
+    transform: rotate(-0.25turn);
+  }
+
+}
+
+
+
+
+
+

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="{{route('movie.create')}}" class="btn btn-primary my-3">Thêm phim</a>
-            <table class="table movie-table">
+            <table class="table table-responesive movie-table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -17,6 +17,8 @@
                         <th scope="col">Active/Inactive</th>
                         <th scope="col">Quality</th>
                         <th scope="col">Subtitle</th>
+                        <th scope="col">Eposides</th>
+                        <th scope="col">Type of Movie</th>
                         <th scope="col">Category</th> 
                         <th scope="col">Genre</th> 
                         <th scope="col">Country</th> 
@@ -53,6 +55,8 @@
                                 Cam
                             @elseif($movie->resolution==4)
                                 FullHD
+                            @elseif($movie->resolution==5)
+                                Trailer
                             @endif
                         </td>
                          <td>
@@ -62,8 +66,24 @@
                                 Phụ đề
                             @endif
                         </td>
+                         <td>{{$movie->sotap}}</td>
+                         <td>
+                            @if($movie->thuocphim=='phimle')
+                                Phim lẻ 1 tập
+                            @else
+                                Phim nhiều tập
+                            @endif
+                         </td>
+
                         <td>{{$movie->category->title}}</td>
-                        <td>{{$movie->genre->title}}</td>
+                        <!-- <td>{{$movie->genre->title}}</td> -->
+                        <td>
+                        @foreach($movie->movie_genre as $gen)
+                            
+                            <span class="badge bg-dark">{{$gen->title}}</span>
+
+                        @endforeach
+                        </td>
                         <td>{{$movie->country->title}}</td>
                         <td>{{$movie->date_create}}</td>
                         <td>{{$movie->date_update}}</td>
