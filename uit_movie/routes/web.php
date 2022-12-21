@@ -30,15 +30,18 @@ Route::get('/home/movie/{slug}',[IndexController::class, 'movie'])->name('movie'
 
 
 
-//Route::get('/test_movie',[IndexController::class, 'movie'])->name('movie');
-//Route::get('/test_login',[IndexController::class, 'login'])->name('login');
+// Route::get('/test_movie',[IndexController::class, 'movie'])->name('movie');
+// Route::get('/test_login',[IndexController::class, 'login'])->name('login');
 // Route::get('/test_signup',[IndexController::class, 'signup'])->name('signup');
 
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/watch',[IndexController::class, 'watch'])->name('watch');
+
+
+
+
 
 //route admin
 Route::resource('category', CategoryController::class);
