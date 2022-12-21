@@ -47,21 +47,34 @@
 <body>
      <!-- NAV -->
      <div class="nav-wrapper">
-        <div class="container">
+        <div class="container-fluid ">
             <div class="nav">
-                <a href="#" class="logo">
+                <a href="#" class="logo ms-3">
                     <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T MOVIE
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Genre</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Series</a></li>
+                   <div class="search-container form-group">
+                    <form action="{{route('tim-kiem')}}" method="GET" class="d-flex form-search">
+                        <li class="search-box mb-2">
+                                    <input type="text" name="search" id="search-input" placeholder="Search movie" >
+                                   <button class="btn btn-search" >                                  
+                                         <i class='bx bx-search-alt'>
+                                         </i>
+                                     </button>
+          
+                        </li>
+                    </form>
+                         <ul class="list-group" id="result-search" style="display:none; position: absolute;">
+                            
+                        </ul>
+                    </div>
+                     <li><a href="#">Home</a></li>
+
+                     @foreach($category as $key => $cate)
+                        <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
+                    @endforeach
                     <li><a href="#">About</a></li>
-                    <li class="search-box">
-                        <input type="search" name="" id="search-input" placeholder="Search movie">
-                        <i class='bx bx-search-alt'></i>
-                    </li>
+               
                     <li>
                         <a href="#" class="btn btn-hover">
                             <span>Sign in</span>
@@ -87,13 +100,27 @@
                   <div class="tt-details columns is-variable is-8">
                      <div class="column is-one-quarter-tablet">
                         <p class="cover has-text-centered"> <img src="{{asset('uploads/movie/'.$movie_slug->image ?? 'cat9180.jpg')}}" alt=""></p>
+                        @if($movie_slug->resolution==5)
+                           <a class="watch watch-trailer button is-danger is-medium is-fullwidth" href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                 <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                              </svg>
+                                   Xem trailer
+                          
+                           </a>
+                           @else
+                              
+                           <a class="watch button is-danger is-medium is-fullwidth" href="{{url('home/watch/'.$movie_slug->slug.'/ep-'.$episode_first->episode)}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                 <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                              </svg>
+                                  Xem phim
+                          
+                           </a>
+                           @endif 
+                           
 
-                        <a class="watch button is-danger is-medium is-fullwidth" href="https://xemphimm.com/watch/26790">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                              <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                           </svg>
-                           Xem phim
-                        </a>
+                       
                      </div>
                      <div class="column main">
                         <h1 class="title is-2">{{$movie_slug->title}}</h1>
@@ -103,7 +130,7 @@
                            @else
                               {{$movie_info['title']}}
                            @endif
-                            (<a href="https://xemphimm.com/year/2022">2022</a>)
+                            (<a href="#">{{date('Y', strtotime($movie_slug->date_release))}}</a>)
                         </h2>
                         <div class="meta"><span>{{$movie_slug->runtime}} phút</span></div>
                         <div class="meta">
@@ -115,13 +142,14 @@
                            </span>
                            <span class="has-text-weight-bold">{{$movie_slug->imdb_point}}</span>
                         </div>
-                        <div class="level genres">
+                        <div class="level genres justify-content-center" style="display:block">
+                           <div class="d-flex justify-content-between align-items-center">
                            <div class="level-left">
                               <div class="level-item">
                                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://xemphimm.com/movie/black-adam~26790" class="fb-share button is-link" target="_blank">
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                        <path d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path>
-                                    </svg> -->
+                                    </svg> 
                                     Chia sẻ
                                  </a>
                               </div>
@@ -132,16 +160,23 @@
                                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                              <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
                                           </svg>
-                                          <!-- -->Bộ sưu tập
+                                                Bộ sưu tập
                                        </button>
                                     </div>
                                  </div>
                               </div>
                            </div>
                            <div class="level-right">
-                              <div class="level-item buttons"><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/vien-tuong">Viễn tưởng</a><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/ky-ao">Kỳ ảo</a><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/hanh-dong">Hành động</a></div>
+                              <div class="level-item buttons">
+                                 @foreach($movie_slug->movie_genre as $gen)
+                            
+                                     <a class="button is-link is-small is-rounded is-inverted is-outlined" href="{{route('genre',$gen->slug)}}">{{$gen->title}}</a>
+
+                                 @endforeach                                 
+                                 
                            </div>
                         </div>
+                     </div>
                         <dl class="horizontal-dl">
                            <dt>Đạo diễn</dt>
                            <dd class="csv">
@@ -165,9 +200,11 @@
 
                            </dd>
                            <dt>Quốc gia</dt>
-                           <dd class="csv"><a href="https://xemphimm.com/country/US">Mỹ</a></dd>
+                           <dd class="csv"><a href="#">{{$movie_slug->country->title}}</a></dd>
                            <dt>Khởi chiếu</dt>
-                           <dd>{{$movie_slug->date_release}}</dd>
+                           <dd>{{date('d-m-Y', strtotime($movie_slug->date_release))}}</dd>
+                           <dt>Số tập :</dt>
+                           <dd class="bg-warning bg-gradient p-2" style="width : 40px; color : black; font-weight: bold">{{$episode_current_list_count}}/{{$movie_slug->sotap}}</dd>
                         </dl>
                         <div class="intro has-text-grey-light">{{$movie_slug->description}}</div>
                         <h3 class="section-header">Diễn viên</h3>
@@ -386,6 +423,25 @@
       <!-- font-awesome -->
 
       <script src="https://kit.fontawesome.com/79572b7f20.js" crossorigin="anonymous"></script>
+      <!-- <script>
+         $(.'watch-trailer').click(function(e){
+   
+               e.prevenDefault();
+               var aid = $(this).attr("href");
+               $('html,body').animate({scrollTop : $(aid).offset().top},'slow')
+            })
+      </script>> -->
+      <script type="text/javascript">
+         $(document).ready(function(){
+            $('.watch-trailer').on('click',function(e){
+               
+                // e.prevenDefault();
+                
+                $('html,body').animate({scrollTop : $('.trailers').offset().top -100},500)
+            })
+     })
+            
+    </script>
 
 </body>
 </html>

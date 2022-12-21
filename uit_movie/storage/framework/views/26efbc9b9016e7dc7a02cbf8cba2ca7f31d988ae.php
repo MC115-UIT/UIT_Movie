@@ -49,7 +49,16 @@
                         </div>
 
 
+                          <div class='form-group'>
+                            <?php echo Form::label('sotap','Eposides',[]); ?>
 
+                            <?php echo Form::text('sotap',isset($movie)?$movie->sotap:'',['style'=>'resize:none','class'=>'form-control my-2']); ?>        
+                        </div>
+                        <div class='form-group'>
+                            <?php echo Form::label('thuocphim','Type of Movie',[]); ?>
+
+                            <?php echo Form::select('thuocphim',['phimle'=>'Phim lẻ 1 tập','phimbo'=>'Phim nhiều tập'],isset($movie)?$movie->thuocphim:'',['style'=>'resize:none','class'=>'form-control my-2']); ?>        
+                        </div>
                         <div class='form-group'>
                             <?php echo Form::label('time','Time',[]); ?>
 
@@ -86,7 +95,7 @@
                          <div class='form-group'>
                             <?php echo Form::label('resolution','Quality',[]); ?>
 
-                            <?php echo Form::select('resolution',['0'=>"HD", '1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD'],isset($movie)?$movie->resolution:'',['class'=>'form-control my-2']); ?>        
+                            <?php echo Form::select('resolution',['0'=>"HD", '1'=>'SD','2'=>'HDCam','3'=>'Cam','4'=>'FullHD','5'=>'Trailer'],isset($movie)?$movie->resolution:'',['class'=>'form-control my-2']); ?>        
                         </div>
                         <div class='form-group'>
                             <?php echo Form::label('subtitle','Subtitle',[]); ?>
@@ -100,9 +109,21 @@
                             <?php echo Form::select('category_id',$category,isset($movie)?$movie->category_id:'',['class'=>'form-control my-2']); ?>        
                         </div>
                         <div class='form-group'>
-                            <?php echo Form::label('Genre','Genre',[]); ?>
+                            <?php echo Form::label('Genre','Genre',[]); ?><br>
+                            <!-- <?php echo Form::select('genre_id',$genre,isset($movie)?$movie->genre_id:'',['class'=>'form-control my-2']); ?> -->
+                            <?php $__currentLoopData = $list_genre; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $gen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(isset($movie)): ?>
+                                       <?php echo Form::checkbox('genre[]',$gen->id,  isset($movie_genre) && $movie_genre->contains($gen->id) ? true : false); ?>
 
-                            <?php echo Form::select('genre_id',$genre,isset($movie)?$movie->genre_id:'',['class'=>'form-control my-2']); ?>        
+                                <?php else: ?>
+                                    <?php echo Form::checkbox('genre[]',$gen->id,  ); ?>
+
+                                <?php endif; ?>
+                                
+                                <?php echo Form::label('genre',$gen->title); ?>
+
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                         </div>
                         <div class='form-group'>
                             <?php echo Form::label('Country','Country',[]); ?>

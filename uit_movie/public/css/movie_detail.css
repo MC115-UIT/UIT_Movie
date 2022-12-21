@@ -4750,7 +4750,17 @@ button.dropdown-item.is-active {
   flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 0;
+ 
+
 }
+.level-left{
+  margin-bottom: 50px;
+}
+/*.level-right{
+  position: absolute;
+  top:0;
+}*/
+
 .level-left .level-item.is-flexible,
 .level-right .level-item.is-flexible {
   flex-grow: 1;

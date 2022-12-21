@@ -1,11 +1,11 @@
 
 
 <?php $__env->startSection('content'); ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="<?php echo e(route('movie.create')); ?>" class="btn btn-primary my-3">Thêm phim</a>
-            <table class="table movie-table">
+            <table class="table table-responesive movie-table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -17,6 +17,8 @@
                         <th scope="col">Active/Inactive</th>
                         <th scope="col">Quality</th>
                         <th scope="col">Subtitle</th>
+                        <th scope="col">Eposides</th>
+                        <th scope="col">Type of Movie</th>
                         <th scope="col">Category</th> 
                         <th scope="col">Genre</th> 
                         <th scope="col">Country</th> 
@@ -53,6 +55,8 @@
                                 Cam
                             <?php elseif($movie->resolution==4): ?>
                                 FullHD
+                            <?php elseif($movie->resolution==5): ?>
+                                Trailer
                             <?php endif; ?>
                         </td>
                          <td>
@@ -62,8 +66,24 @@
                                 Phụ đề
                             <?php endif; ?>
                         </td>
+                         <td><?php echo e($movie->sotap); ?></td>
+                         <td>
+                            <?php if($movie->thuocphim=='phimle'): ?>
+                                Phim lẻ 1 tập
+                            <?php else: ?>
+                                Phim nhiều tập
+                            <?php endif; ?>
+                         </td>
+
                         <td><?php echo e($movie->category->title); ?></td>
-                        <td><?php echo e($movie->genre->title); ?></td>
+                        <!-- <td><?php echo e($movie->genre->title); ?></td> -->
+                        <td>
+                        <?php $__currentLoopData = $movie->movie_genre; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            
+                            <span class="badge bg-dark"><?php echo e($gen->title); ?></span>
+
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </td>
                         <td><?php echo e($movie->country->title); ?></td>
                         <td><?php echo e($movie->date_create); ?></td>
                         <td><?php echo e($movie->date_update); ?></td>

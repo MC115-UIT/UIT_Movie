@@ -229,6 +229,21 @@
             });
         });
 </script>
+<script type="text/javascript">
+    $('.select-movie').change(function(){
+        var id = $(this).find(':selected').val();
+        $.ajax({
+
+            url:"<?php echo e(route('select-movie')); ?>",
+            method:"GET",
+            data:{id:id},
+            success: function(data){
+                $('#show_movie').html(data);
+            }
+        })
+
+    })
+</script>
    <!--  <script type="text/javascript">
        $(document).ready(function(){
              $('#sort_position').sortable({

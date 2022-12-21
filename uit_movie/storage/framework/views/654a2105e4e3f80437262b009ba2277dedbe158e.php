@@ -47,21 +47,34 @@
 <body>
      <!-- NAV -->
      <div class="nav-wrapper">
-        <div class="container">
+        <div class="container-fluid ">
             <div class="nav">
-                <a href="#" class="logo">
+                <a href="#" class="logo ms-3">
                     <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T MOVIE
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Genre</a></li>
-                    <li><a href="#">Movies</a></li>
-                    <li><a href="#">Series</a></li>
+                   <div class="search-container form-group">
+                    <form action="<?php echo e(route('tim-kiem')); ?>" method="GET" class="d-flex form-search">
+                        <li class="search-box mb-2">
+                                    <input type="text" name="search" id="search-input" placeholder="Search movie" >
+                                   <button class="btn btn-search" >                                  
+                                         <i class='bx bx-search-alt'>
+                                         </i>
+                                     </button>
+          
+                        </li>
+                    </form>
+                         <ul class="list-group" id="result-search" style="display:none; position: absolute;">
+                            
+                        </ul>
+                    </div>
+                     <li><a href="#">Home</a></li>
+
+                     <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li class="mega"><a title="<?php echo e($cate->title); ?>" href="<?php echo e(route('category',$cate->slug)); ?>"><?php echo e($cate->title); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <li><a href="#">About</a></li>
-                    <li class="search-box">
-                        <input type="search" name="" id="search-input" placeholder="Search movie">
-                        <i class='bx bx-search-alt'></i>
-                    </li>
+               
                     <li>
                         <a href="#" class="btn btn-hover">
                             <span>Sign in</span>
@@ -87,13 +100,27 @@
                   <div class="tt-details columns is-variable is-8">
                      <div class="column is-one-quarter-tablet">
                         <p class="cover has-text-centered"> <img src="<?php echo e(asset('uploads/movie/'.$movie_slug->image ?? 'cat9180.jpg')); ?>" alt=""></p>
+                        <?php if($movie_slug->resolution==5): ?>
+                           <a class="watch watch-trailer button is-danger is-medium is-fullwidth" href="#">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                 <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                              </svg>
+                                   Xem trailer
+                          
+                           </a>
+                           <?php else: ?>
+                              
+                           <a class="watch button is-danger is-medium is-fullwidth" href="<?php echo e(url('home/watch/'.$movie_slug->slug.'/ep-'.$episode_first->episode)); ?>">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                 <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
+                              </svg>
+                                  Xem phim
+                          
+                           </a>
+                           <?php endif; ?> 
+                           
 
-                        <a class="watch button is-danger is-medium is-fullwidth" href="https://xemphimm.com/watch/26790">
-                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                              <path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path>
-                           </svg>
-                           Xem phim
-                        </a>
+                       
                      </div>
                      <div class="column main">
                         <h1 class="title is-2"><?php echo e($movie_slug->title); ?></h1>
@@ -105,7 +132,7 @@
                               <?php echo e($movie_info['title']); ?>
 
                            <?php endif; ?>
-                            (<a href="https://xemphimm.com/year/2022">2022</a>)
+                            (<a href="#"><?php echo e(date('Y', strtotime($movie_slug->date_release))); ?></a>)
                         </h2>
                         <div class="meta"><span><?php echo e($movie_slug->runtime); ?> phút</span></div>
                         <div class="meta">
@@ -117,13 +144,14 @@
                            </span>
                            <span class="has-text-weight-bold"><?php echo e($movie_slug->imdb_point); ?></span>
                         </div>
-                        <div class="level genres">
+                        <div class="level genres justify-content-center" style="display:block">
+                           <div class="d-flex justify-content-between align-items-center">
                            <div class="level-left">
                               <div class="level-item">
                                  <a href="https://www.facebook.com/sharer/sharer.php?u=https://xemphimm.com/movie/black-adam~26790" class="fb-share button is-link" target="_blank">
-                                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                        <path d="M448 80v352c0 26.5-21.5 48-48 48h-85.3V302.8h60.6l8.7-67.6h-69.3V192c0-19.6 5.4-32.9 33.5-32.9H384V98.7c-6.2-.8-27.4-2.7-52.2-2.7-51.6 0-87 31.5-87 89.4v49.9H184v67.6h60.9V480H48c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48z"></path>
-                                    </svg> -->
+                                    </svg> 
                                     Chia sẻ
                                  </a>
                               </div>
@@ -134,16 +162,23 @@
                                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                                              <path d="M368 224H224V80c0-8.84-7.16-16-16-16h-32c-8.84 0-16 7.16-16 16v144H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h144v144c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V288h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path>
                                           </svg>
-                                          <!-- -->Bộ sưu tập
+                                                Bộ sưu tập
                                        </button>
                                     </div>
                                  </div>
                               </div>
                            </div>
                            <div class="level-right">
-                              <div class="level-item buttons"><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/vien-tuong">Viễn tưởng</a><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/ky-ao">Kỳ ảo</a><a class="button is-link is-small is-rounded is-inverted is-outlined" href="https://xemphimm.com/genre/hanh-dong">Hành động</a></div>
+                              <div class="level-item buttons">
+                                 <?php $__currentLoopData = $movie_slug->movie_genre; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gen): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            
+                                     <a class="button is-link is-small is-rounded is-inverted is-outlined" href="<?php echo e(route('genre',$gen->slug)); ?>"><?php echo e($gen->title); ?></a>
+
+                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                 
+                                 
                            </div>
                         </div>
+                     </div>
                         <dl class="horizontal-dl">
                            <dt>Đạo diễn</dt>
                            <dd class="csv">
@@ -167,9 +202,11 @@
 
                            </dd>
                            <dt>Quốc gia</dt>
-                           <dd class="csv"><a href="https://xemphimm.com/country/US">Mỹ</a></dd>
+                           <dd class="csv"><a href="#"><?php echo e($movie_slug->country->title); ?></a></dd>
                            <dt>Khởi chiếu</dt>
-                           <dd><?php echo e($movie_slug->date_release); ?></dd>
+                           <dd><?php echo e(date('d-m-Y', strtotime($movie_slug->date_release))); ?></dd>
+                           <dt>Số tập :</dt>
+                           <dd class="bg-warning bg-gradient p-2" style="width : 40px; color : black; font-weight: bold"><?php echo e($episode_current_list_count); ?>/<?php echo e($movie_slug->sotap); ?></dd>
                         </dl>
                         <div class="intro has-text-grey-light"><?php echo e($movie_slug->description); ?></div>
                         <h3 class="section-header">Diễn viên</h3>
@@ -248,61 +285,26 @@
                         <h3 class="section-header">Phim tương tự</h3>
                         <div class="related-titles">
                            <div class="slick-slider slick-initialized" dir="ltr">
-                              <div class="slick-arrow slick-prev slick-disabled" style="display:block">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"></path>
-                                 </svg>
-                              </div>
                               <div class="slick-list">
-                                 <div class="slick-track" style="width: 1990px; opacity: 1; transform: translate3d(0px, 0px, 0px);">
-                                    <div data-index="0" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
+                                 <div class="slick-track movie-related carousel-nav-center owl-carousel" style="width: auto; opacity: 1; transform: translate3d(0px, 0px, 0px);">
+                                 <?php $__currentLoopData = $movie_related; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                 <div data-index="<?php echo e($key); ?>" class="slick-slide slick-active slick-current" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
                                        <div>
                                           <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="cover" href="https://xemphimm.com/movie/my-hero-academia-world-heroes-mission~20508"><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="My Hero Academia: World Heroes&#39; Mission" title="My Hero Academia: World Heroes&#39; Mission"></a>
-                                             <h3 class="name"><a href="https://xemphimm.com/movie/my-hero-academia-world-heroes-mission~20508">My Hero Academia: World Heroes' Mission</a></h3>
+                                             <a class="cover" href="<?php echo e(route('movie',$movie->slug)); ?>">
+                                                <img src="<?php echo e(asset('uploads/movie/'.$movie->image)); ?>"" alt="<?php echo e($movie->title); ?>" title="<?php echo e($movie->title); ?>">
+                                             </a>
+                                             <h3 class="name">
+                                                <a href="<?php echo e(route('movie',$movie->slug)); ?>"><?php echo e($movie->title); ?></a>
+                                             </h3>
                                           </div>
                                        </div>
-                                    </div>
-                                    <div data-index="1" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="cover" href="https://xemphimm.com/movie/project-gemini~20869"><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Project Gemini" title="Project Gemini"></a>
-                                             <h3 class="name"><a href="https://xemphimm.com/movie/project-gemini~20869">Project Gemini</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="2" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="cover" href="https://xemphimm.com/movie/the-battle-at-lake-changjin-ii~21185"><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="The Battle at Lake Changjin II" title="The Battle at Lake Changjin II"></a>
-                                             <h3 class="name"><a href="https://xemphimm.com/movie/the-battle-at-lake-changjin-ii~21185">The Battle at Lake Changjin II</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="3" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="cover" href="https://xemphimm.com/movie/fullmetal-alchemist-final-transmutation-the-final-alchemy~25823"><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Fullmetal Alchemist: Final Transmutation / The Final Alchemy" title="Fullmetal Alchemist: Final Transmutation / The Final Alchemy"></a>
-                                             <h3 class="name"><a href="https://xemphimm.com/movie/fullmetal-alchemist-final-transmutation-the-final-alchemy~25823">Fullmetal Alchemist: Final Transmutation / The Final Alchemy</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                    <div data-index="3" class="slick-slide slick-active" tabindex="-1" aria-hidden="false" style="outline: none; width: 199px;">
-                                       <div>
-                                          <div class="item" tabindex="-1" style="width:100%;display:inline-block">
-                                             <a class="cover" href="https://xemphimm.com/movie/fullmetal-alchemist-final-transmutation-the-final-alchemy~25823"><img src="https://image.tmdb.org/t/p/original/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg" alt="Fullmetal Alchemist: Final Transmutation / The Final Alchemy" title="Fullmetal Alchemist: Final Transmutation / The Final Alchemy"></a>
-                                             <h3 class="name"><a href="https://xemphimm.com/movie/fullmetal-alchemist-final-transmutation-the-final-alchemy~25823">Fullmetal Alchemist: Final Transmutation / The Final Alchemy</a></h3>
-                                          </div>
-                                       </div>
-                                    </div>
-                                  
+                                 </div>
+                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                  </div>
                               </div>
-                              <div class="slick-arrow slick-next" style="display:block">
-                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                    <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path>
-                                 </svg>
-                              </div>
+                              
                            </div>
                         </div>
                      </div>
@@ -423,6 +425,25 @@
       <!-- font-awesome -->
 
       <script src="https://kit.fontawesome.com/79572b7f20.js" crossorigin="anonymous"></script>
+      <!-- <script>
+         $(.'watch-trailer').click(function(e){
+   
+               e.prevenDefault();
+               var aid = $(this).attr("href");
+               $('html,body').animate({scrollTop : $(aid).offset().top},'slow')
+            })
+      </script>> -->
+      <script type="text/javascript">
+         $(document).ready(function(){
+            $('.watch-trailer').on('click',function(e){
+               
+                // e.prevenDefault();
+                
+                $('html,body').animate({scrollTop : $('.trailers').offset().top -100},500)
+            })
+     })
+            
+    </script>
 
 </body>
 </html>
