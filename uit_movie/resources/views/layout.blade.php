@@ -28,7 +28,7 @@
     <div class="nav-wrapper">
         <div class="container-fluid ">
             <div class="nav">
-                <a href="#" class="logo ms-3">
+                <a href="{{route('home')}}" class="logo ms-3">
                     <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T MOVIE
                 </a>
                 <ul class="nav-menu" id="nav-menu">
@@ -52,13 +52,13 @@
                      @foreach($category as $key => $cate)
                         <li class="mega"><a title="{{$cate->title}}" href="{{route('category',$cate->slug)}}">{{$cate->title}}</a></li>
                     @endforeach
-                    <li><a href="#">About</a></li>
+                    <li><a href="#" class="about">About</a></li>
                
-                    <li>
+                   <!--  <li>
                         <a href="#" class="btn btn-hover">
                             <span>Sign in</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- MOBILE MENU TOGGLE -->
                 <div class="hamburger-menu" id="hamburger-menu">
@@ -75,118 +75,63 @@
         <div class="hero-slide">
             <div class="owl-carousel carousel-nav-center" id="hero-carousel">
                 <!-- SLIDE ITEM -->
-                <div class="hero-slide-item">
-                    <img src="{{asset('./images/black-banner.png')}}" alt="">
+                @foreach($movie_new as $key => $movie)
+                    <div class="hero-slide-item">
+                        @php
+                            $info = App\Http\Controllers\ApiTmdbController::getInfoMovie($movie->tmdb_id)
+                        @endphp
+                    <img class="backdrop backdrop-layout img-fluid" src="https://image.tmdb.org/t/p/original/{{$info['backdrop_path']}}" alt="">
                     <div class="overlay"></div>
                     <div class="hero-slide-item-content">
                         <div class="item-content-wraper">
                             <div class="item-content-title top-down">
-                                Black Panther
+                                {{$movie->title}}
                             </div>
                             <div class="movie-infos top-down delay-2">
                                 <div class="movie-info">
                                     <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
+                                    <span>{{$movie->imdb_point}}</span>
                                 </div>
                                 <div class="movie-info">
                                     <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
+                                    <span>{{$movie->runtime}} mins</span>
                                 </div>
                                 <div class="movie-info">
+                                @if($movie->resolution==0)
                                     <span>HD</span>
+                                @elseif($movie->resolution==1)
+                                    <span>SD</span>
+                                @elseif($movie->resolution==2)
+                                    <span>HDCam</span>
+                                @elseif($movie->resolution==3)
+                                    <span>Cam</span>
+                                @elseif($movie->resolution==4)
+                                    <span>FullHD</span>
+                                @elseif($movie->resolution==5)
+                                    <span>Trailer</span>
+                                @endif
                                 </div>
                                 <div class="movie-info">
                                     <span>16+</span>
                                 </div>
                             </div>
                             <div class="item-content-description top-down delay-4">
-                                   Chiến binh Báo Đen: Wakanda bất diệt là một bộ phim siêu anh hùng của Hoa Kỳ công chiếu năm 2022, dựa trên nhân vật Black Panther của Marvel Comics, được sản xuất bởi Marvel Studios và phân phối bởi Walt Disney Studios Motion Pictures.
+                                   {{$movie->description}}
                             </div>
                             <div class="item-action top-down delay-6">
-                                <a href="#" class="btn btn-hover">
+                                <a href="{{route('movie',$movie->slug)}}" class="btn btn-hover">
                                     <i class="bx bxs-right-arrow"></i>
-                                    <span>Watch now</span>
+                                    <span>Xem ngay</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
+                
                 <!-- END SLIDE ITEM -->
                 <!-- SLIDE ITEM -->
-                <div class="hero-slide-item">
-                    <img src="{{asset('./images/supergirl-banner.jpg')}}" alt="">
-                    <div class="overlay"></div>
-                    <div class="hero-slide-item-content">
-                        <div class="item-content-wraper">
-                            <div class="item-content-title top-down">
-                                Supergirl
-                            </div>
-                            <div class="movie-infos top-down delay-2">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                            <div class="item-content-description top-down delay-4">
-                                   Chiến binh Báo Đen: Wakanda bất diệt là một bộ phim siêu anh hùng của Hoa Kỳ công chiếu năm 2022, dựa trên nhân vật Black Panther của Marvel Comics, được sản xuất bởi Marvel Studios và phân phối bởi Walt Disney Studios Motion Pictures.
-                            </div>
-                            <div class="item-action top-down delay-6">
-                                <a href="#" class="btn btn-hover">
-                                    <i class="bx bxs-right-arrow"></i>
-                                    <span>Watch now</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END SLIDE ITEM -->
-                <!-- SLIDE ITEM -->
-                <div class="hero-slide-item">
-                    <img src="{{asset('./images/wanda-banner.jpg')}}" alt="">
-                    <div class="overlay"></div>
-                    <div class="hero-slide-item-content">
-                        <div class="item-content-wraper">
-                            <div class="item-content-title top-down">
-                                Wanda Vision
-                            </div>
-                            <div class="movie-infos top-down delay-2">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                            <div class="item-content-description top-down delay-4">
-                                   Chiến binh Báo Đen: Wakanda bất diệt là một bộ phim siêu anh hùng của Hoa Kỳ công chiếu năm 2022, dựa trên nhân vật Black Panther của Marvel Comics, được sản xuất bởi Marvel Studios và phân phối bởi Walt Disney Studios Motion Pictures.
-                            </div>
-                            <div class="item-action top-down delay-6">
-                                <a href="#" class="btn btn-hover">
-                                    <i class="bx bxs-right-arrow"></i>
-                                    <span>Watch now</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- END SLIDE ITEM -->
             </div>
         </div>
@@ -196,6 +141,7 @@
             <div class="owl-carousel" id="top-movies-slide">
                 <!-- MOVIE ITEM -->
                 @foreach($movie_hot as $key => $mov)
+                <a href="{{route('movie',$mov->slug)}}">
                 <div class="movie-item">
                     <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="">
                     <div class="movie-item-content">
@@ -232,6 +178,7 @@
                         </div>
                     </div>
                 </div>
+            </a>
                 @endforeach
                 <!-- END MOVIE ITEM -->
                 <!-- MOVIE ITEM -->
@@ -343,7 +290,7 @@
                           <div class="select">
                              <select class="form-control" name="order">
                                 <option selected="" value="0">- Mặc định -</option>
-                                <option value="updated" {{ ( isset($_GET['order'])  && $_GET['order']=="updated") ? 'selected' : '' }}>
+                                <option value="updated"{{ ( isset($_GET['order'])  && $_GET['order']=="updated") ? 'selected' : '' }}>
                                    Ngày cập nhật
                                 </option>
                                 <option value="publishDate" {{ ( isset($_GET['order'])  && $_GET['order']=="publishDate") ? 'selected' : '' }}>Ngày phát hành</option>
@@ -362,11 +309,11 @@
     </div>
 
     <!-- PRICING SECTION -->
-    <div class="section">
+    <div class="section" style="display: block;">
         <div class="container">
             <div class="pricing">
                 <div class="pricing-header">
-                    Fl<span class="main-color">i</span>x pricing
+                    U<span class="main-color">I</span>T Movie - About
                 </div>
                 <div class="pricing-list">
                     <div class="row">
@@ -374,21 +321,21 @@
                             <div class="pricing-box">
                                 <div class="pricing-box-header">
                                     <div class="pricing-name">
-                                        Basic
+                                        Miễn phí
                                     </div>
                                     <div class="pricing-price">
                                         Free
                                     </div>
                                 </div>
                                 <div class="pricing-box-content">
-                                    <p>Originals</p>
-                                    <p>Swich plans anytime</p>
-                                    <p><del>65+ top Live</del></p>
-                                    <p><del>TV Channels</del></p>
+                                    <p>Xem phim miễn phí</p>
+                                    <p>Năm 2022</p>
+                                    <p>100+ Movie/Tv Show</p>
+                                    <p>Thuyết Minh/VietSub</p>
                                 </div>
                                 <div class="pricing-box-action">
-                                    <a href="#" class="btn btn-hover">
-                                        <span>Register now</span>
+                                    <a href="#" class="btn btn-hover watch-now">
+                                        <span>Xem ngay</span>
                                     </a>
                                 </div>
                             </div>
@@ -397,21 +344,21 @@
                             <div class="pricing-box hightlight">
                                 <div class="pricing-box-header">
                                     <div class="pricing-name">
-                                        Premium
+                                        Chất lượng
                                     </div>
                                     <div class="pricing-price">
-                                        $35.99 <span>/month</span>
+                                        <span>Quality</span>
                                     </div>
                                 </div>
                                 <div class="pricing-box-content">
-                                    <p>Originals</p>
-                                    <p>Swich plans anytime</p>
-                                    <p><del>65+ top Live</del></p>
-                                    <p><del>TV Channels</del></p>
+                                    <p>Nhanh chóng</p>
+                                    <p>Cập nhật sớm</p>
+                                    <p>Độ phân giải cao</p>
+                                    <p>Âm thanh sống động</p>
                                 </div>
                                 <div class="pricing-box-action">
-                                    <a href="#" class="btn btn-hover">
-                                        <span>Register now</span>
+                                    <a href="#" class="btn btn-hover watch-now">
+                                        <span>Xem ngay</span>
                                     </a>
                                 </div>
                             </div>
@@ -420,21 +367,21 @@
                             <div class="pricing-box">
                                 <div class="pricing-box-header">
                                     <div class="pricing-name">
-                                        VIP
+                                        Tốc độ
                                     </div>
                                     <div class="pricing-price">
-                                        $65.99 <span>/month</span>
+                                        <span>Speed</span>
                                     </div>
                                 </div>
                                 <div class="pricing-box-content">
-                                    <p>Originals</p>
-                                    <p>Swich plans anytime</p>
-                                    <p><del>65+ top Live</del></p>
-                                    <p><del>TV Channels</del></p>
+                                    <p>Ổn định</p>
+                                    <p>Trọn vẹn</p>
+                                    <p>Linh hoạt</p>
+                                    <p>Chuyển đổi nhanh chóng</p>
                                 </div>
                                 <div class="pricing-box-action">
-                                    <a href="#" class="btn btn-hover">
-                                        <span>Register now</span>
+                                    <a href="#" class="btn btn-hover watch-now">
+                                        <span>Xem ngay</span>
                                     </a>
                                 </div>
                             </div>
@@ -447,18 +394,16 @@
     <!-- END PRICING SECTION -->
 
     <!-- FOOTER SECTION -->
-    <footer class="section footer-layout">
+    <footer class="section footer-layout" style="display: block">
         <div class="container">
             <div class="row">
                 <div class="col-4 col-md-6 col-sm-12">
                     <div class="content">
                         <a href="#" class="logo">
-                            <i class='bx bx-movie-play bx-tada main-color'></i>Fl<span class="main-color">i</span>x
+                            <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T Movie
                         </a>
                         <p>
-                            Chiến binh Báo Đen: Wakanda bất diệt là một bộ phim siêu anh hùng của Hoa Kỳ công chiếu năm 2022, 
-                            dựa trên nhân vật Black Panther của Marvel Comics, được sản xuất bởi Marvel Studios và phân phối 
-                            bởi Walt Disney Studios Motion Pictures.
+                           UIT Movie mang đến cho các bạn các tập phim bộ, lẻ chiếu rạp mới nhất, hấp dẫn nhất, cập nhật thường, full Vietsub, miễn phí online thường xuyên cùng với đường truyền tốc độ cao, ổn định, đảm bảo trải nghiệm xem phim trọn vẹn chân thực như ở rạp chiếu phim chuyên nghiệp.
                         </p>
                         <div class="social-list">
                             <a href="#" class="social-item">
@@ -477,7 +422,7 @@
                     <div class="row">
                         <div class="col-3 col-md-6 col-sm-6">
                             <div class="content">
-                                <p><b>Flix</b></p>
+                                <p><b>UIT Movie</b></p>
                                 <ul class="footer-menu">
                                     <li><a href="#">About us</a></li>
                                     <li><a href="#">My profile</a></li>
@@ -534,7 +479,7 @@
 
     <!-- COPYRIGHT SECTION -->
     <div class="copyright">
-        Copyright 2021 </a>
+        Copyright 2022 </a>
     </div>
     <!-- END COPYRIGHT SECTION -->
 
@@ -587,7 +532,29 @@
                     })
                 })
     </script>
-  
+   <script type="text/javascript">
+         $(document).ready(function(){
+            $('.watch-now').on('click',function(e){
+               
+                // e.prevenDefault();
+                
+                $('html,body').animate({scrollTop : $('.hero-slide').offset().top -100},500)
+            })
+     }) 
+            
+    </script>
+       <script type="text/javascript">
+         $(document).ready(function(){
+            $('.about').on('click',function(e){
+               
+                // e.prevenDefault();
+                
+                $('html,body').animate({scrollTop : $('.pricing-box').offset().top - 150},500)
+            })
+     }) 
+            
+    </script>
+    
 
 
 </body>

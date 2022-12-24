@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Genre;
+use App\Models\Country;
 use App\Models\Movie;
 use App\Models\Episode;
 use Carbon\Carbon;
+use Flasher\Toastr\Prime\ToastrFactory;
+
 
 class EpisodeController extends Controller
 {
@@ -17,9 +22,22 @@ class EpisodeController extends Controller
     public function index(){
 
         $list_episode = Episode::with('movie')->orderBy('id','DESC')->get();
-        return view('admincp.episode.index',compact('list_episode'));
+         $c_category=Category::all()->count();
+        $c_genre=Genre::all()->count();
+        $c_country=Country::all()->count();
+        $c_movie=Movie::all()->count();
+        return view('admincp.episode.index',compact('list_episode','c_category','c_genre','c_country','c_movie'));
     }
+    public function add_episode($id){
+        $movie=Movie::find($id);
+        $list_episode = Episode::with('movie')->where('movie_id',$id)->orderBy('episode','DESC')->get();
 
+         $c_category=Category::all()->count();
+        $c_genre=Genre::all()->count();
+        $c_country=Country::all()->count();
+        $c_movie=Movie::all()->count();
+        return view('admincp.episode.add_episode',compact('list_episode','movie','c_category','c_genre','c_country','c_movie'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -28,8 +46,12 @@ class EpisodeController extends Controller
     public function create()
     {
         $list_movie=Movie::orderBy('id','DESC')->pluck('title','id');
+        $c_category=Category::all()->count();
+        $c_genre=Genre::all()->count();
+        $c_country=Country::all()->count();
+        $c_movie=Movie::all()->count();
 
-        return view('admincp.episode.form',compact('list_movie'));
+        return view('admincp.episode.form',compact('list_movie','c_category','c_genre','c_country','c_movie'));
         //
     }
 
@@ -41,16 +63,43 @@ class EpisodeController extends Controller
      */
     public function store(Request $request)
     {
-         $data =$request ->all();
-        $ep=new Episode();
-        $ep->movie_id=$data['movie_id'];
-        $ep->linkphim=$data['link'];
-        $ep->episode=$data['eposide'];
-        
-        $ep->created_at=Carbon::now('Asia/Ho_Chi_Minh');
-        $ep->updated_at=Carbon::now('Asia/Ho_Chi_Minh');
+                $flasher=app('flasher.toastr');
 
-        $ep->save();
+          $data =$request ->validate(
+            [   
+                'movie_id'=>'required',
+                'link'=>'required',
+                'episode'=>'required',
+            ],
+            [
+                
+                'movie_id.required'=>'Id phim phải có',
+                'link.required'=>'Link tập phim phải có',
+                'episode.required'=>'Tập phim phải có',
+                
+            ]
+        );
+
+         $episode_check=Episode::with('movie')->where('episode',$data['episode'])->where('movie_id',$data['movie_id'])->count();
+
+         if($episode_check>0){
+
+            return redirect()->back();
+         }else{
+                 $ep=new Episode();
+                $ep->movie_id=$data['movie_id'];
+                $ep->linkphim=$data['link'];
+                $ep->episode=$data['episode'];
+                
+                $ep->created_at=Carbon::now('Asia/Ho_Chi_Minh');
+                $ep->updated_at=Carbon::now('Asia/Ho_Chi_Minh');
+                         $flasher->addSuccess('Thêm tập phim thành công!');
+
+                $ep->save();
+
+         }
+
+       
         return redirect()->back();
     }
 
@@ -74,10 +123,14 @@ class EpisodeController extends Controller
     public function edit($id)
     {
         //
+         $c_category=Category::all()->count();
+        $c_genre=Genre::all()->count();
+        $c_country=Country::all()->count();
+        $c_movie=Movie::all()->count();
         $list_movie=Movie::orderBy('id','DESC')->pluck('title','id');
         $episode=Episode::find($id);
 
-        return view('admincp.episode.form',compact('episode','list_movie'));
+        return view('admincp.episode.form',compact('episode','list_movie','c_category','c_genre','c_country','c_movie'));
     }
 
     /**
@@ -89,7 +142,22 @@ class EpisodeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data =$request ->all();
+                $flasher=app('flasher.toastr');
+
+        $data =$request ->validate(
+            [   
+                'movie_id'=>'required',
+                'link'=>'required',
+                'episode'=>'required',
+            ],
+            [
+                
+                'movie_id.required'=>'Id phim phải có',
+                'link.required'=>'Link tập phim phải có',
+                'episode.required'=>'Tập phim phải có',
+                
+            ]
+        );
         $ep=Episode::find($id);
         $ep->movie_id=$data['movie_id'];
         $ep->linkphim=$data['link'];
@@ -99,6 +167,8 @@ class EpisodeController extends Controller
         $ep->updated_at=Carbon::now('Asia/Ho_Chi_Minh');
 
         $ep->save();
+                 $flasher->addSuccess('Cập nhật tập phim thành công!');
+
         return redirect()->route('episode.index');
     }
 
@@ -110,8 +180,12 @@ class EpisodeController extends Controller
      */
     public function destroy($id)
     {
+                $flasher=app('flasher.toastr');
+
         $ep = Episode::find($id)->delete();
         //
+                 $flasher->addSuccess('Xóa tập phim thành công!');
+
         return redirect()->to('episode');
     }
     public function select_movie(){

@@ -7,7 +7,15 @@
             <div class="card">
                 <a href="{{route('episode.index')}}" class="btn btn-primary">Liệt kê danh sách tập phim</a>
                 <div class="card-header">Quản lí tập phim</div>
-               
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{$error}}<li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card-body">
                      @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -35,7 +43,7 @@
                             {!!Form::text('eposide',isset($episode)?$episode->episode:'',['style'=>'resize:none','class'=>'form-control my-2'])!!}     -->
                               @if(!isset($episode))
                                 {!!Form::label('episode','Tập phim',[])!!}
-                                <select name="eposide" class="form-control" id="show_movie">
+                                <select name="episode" class="form-control" id="show_movie">
                                 
 
                                 </select>

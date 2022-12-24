@@ -28,11 +28,14 @@ Route::get('/home/category/{slug}',[IndexController::class, 'category'])->name('
 Route::get('/home/movie/{slug}',[IndexController::class, 'movie'])->name('movie');
 Route::get('/home/genre/{slug}',[IndexController::class, 'genre'])->name('genre');
 Route::get('/home/watch/{slug}/{ep}',[IndexController::class, 'watch'])->name('watch');
+Route::get('/home/country/{slug}',[IndexController::class, 'country'])->name('country');
 
 
 
 
 
+Route::get('add-episode/{id}',[EpisodeController::class, 'add_episode'])->name('add-episode');
+Route::post('add-rating',[IndexController::class, 'add_rating'])->name('add-rating');
 Route::get('/search',[IndexController::class, 'timkiem'])->name('tim-kiem');
 Route::get('/filter',[IndexController::class, 'filter'])->name('filter_movie');
 
@@ -61,6 +64,7 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 Route::resource('episode', EpisodeController::class);
+
 Route::get('select-movie',[EpisodeController::class, 'select_movie'])->name('select-movie');
 
 
@@ -68,3 +72,19 @@ Route::post('resorting',[CategoryController::class,'resorting'])->name('resortin
 
 
 Route::get('/test_api/{id}',[ApiTmdbController::class, 'getInfoMovie']);
+
+Route::get('/category_select',[MovieController::class, 'category_select'])->name('category-select');
+Route::get('/country_select',[MovieController::class, 'country_select'])->name('country-select');
+Route::get('/phimhot_select',[MovieController::class, 'phimhot_select'])->name('phimhot-select');
+Route::get('/sub_select',[MovieController::class, 'sub_select'])->name('sub-select');
+Route::get('/status_select',[MovieController::class, 'status_select'])->name('status-select');
+Route::get('/resolution_select',[MovieController::class, 'resolution_select'])->name('resolution-select');
+
+
+
+
+
+
+
+
+

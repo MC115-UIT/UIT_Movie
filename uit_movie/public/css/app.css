@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
     --main-color: #c0392b;
     --body-bg: #181616;
@@ -522,6 +524,10 @@ a.movie-item:hover {
       margin-left: 0px;
       padding-left: 0px;
     }
+
+ }
+ .rating .checked{
+    color: orange;
  }
 .movie-item {
     display: block;
@@ -802,7 +808,13 @@ footer .content {
         max-width: 200px;
         width: 100%;
     }
+
   }
+   .backdrop-layout{
+
+        width: 80%;
+        height: auto;
+    }
 
 /*   #MOVIE-DETAILS
 \*---------------------------*/
