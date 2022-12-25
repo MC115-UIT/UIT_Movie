@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Category;
+use App\Models\Genre;
+use App\Models\Country;
+use App\Models\Movie;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+         $c_category=Category::all()->count();
+        $c_genre=Genre::all()->count();
+        $c_country=Country::all()->count();
+        $c_movie=Movie::all()->count();
+
+
+        return view('home',compact('c_category','c_genre','c_country','c_movie'));
     }
 }

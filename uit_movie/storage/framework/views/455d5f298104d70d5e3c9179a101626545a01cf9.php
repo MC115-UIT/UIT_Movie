@@ -1,32 +1,47 @@
  
  <?php $__env->startSection('content'); ?>
  <!-- LATEST MOVIES SECTION -->
-    <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-    <div class="section pt-5">
-        <div class="container">
-            <div class="section-header">
-                <?php echo e($cate->title); ?>
+        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <div class="section pt-5">
+            <div class="container">
+                <div class="section-header">
+                    <?php echo e($cate->title); ?>
 
-            </div>
-            <div class="movies-slide carousel-nav-center owl-carousel">
+                </div>
+                <div class="movies-slide carousel-nav-center owl-carousel">
                 <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/theatre-dead.jpg" alt="">
+            <?php if($cate->slug=='phim-le'): ?>
+                <?php $__currentLoopData = $movie_le; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key3 =>$movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <a href="<?php echo e(route('movie',$movie->slug)); ?>" class="movie-item">
+                    <img src="<?php echo e(asset('uploads/movie/'.$movie->image)); ?>" alt="">
                     <div class="movie-item-content">
                         <div class="movie-item-title">
-                            Theatre of the dead
+                           <?php echo e($movie->title); ?>
+
                         </div>
                         <div class="movie-infos">
                             <div class="movie-info">
                                 <i class="bx bxs-star"></i>
-                                <span>9.5</span>
+                                <span><?php echo e($movie->imdb_point); ?></span>
                             </div>
                             <div class="movie-info">
                                 <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
+                                <span><?php echo e($movie->runtime); ?> mins</span>
                             </div>
                             <div class="movie-info">
+                            <?php if($movie->resolution==0): ?>
                                 <span>HD</span>
+                            <?php elseif($movie->resolution==1): ?>
+                                <span>SD</span>
+                            <?php elseif($movie->resolution==2): ?>
+                                <span>HDCam</span>
+                            <?php elseif($movie->resolution==3): ?>
+                                <span>Cam</span>
+                            <?php elseif($movie->resolution==4): ?>
+                                <span>FullHD</span>
+                            <?php elseif($movie->resolution==5): ?>
+                                <span>Trailer</span>
+                            <?php endif; ?>
                             </div>
                             <div class="movie-info">
                                 <span>16+</span>
@@ -34,25 +49,43 @@
                         </div>
                     </div>
                 </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/transformer.jpg" alt="">
+                    
+                
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+            <?php else: ?>
+                <?php $__currentLoopData = $movie_cate; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key2 =>$movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+                <?php if($movie->category_id==$cate->id): ?> 
+                    <a href="<?php echo e(route('movie',$movie->slug)); ?>" class="movie-item">
+                    <img src="<?php echo e(asset('uploads/movie/'.$movie->image)); ?>" alt="">
                     <div class="movie-item-content">
                         <div class="movie-item-title">
-                            Transformer
+                           <?php echo e($movie->title); ?>
+
                         </div>
                         <div class="movie-infos">
                             <div class="movie-info">
                                 <i class="bx bxs-star"></i>
-                                <span>9.5</span>
+                                <span><?php echo e($movie->imdb_point); ?></span>
                             </div>
                             <div class="movie-info">
                                 <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
+                                <span><?php echo e($movie->runtime); ?> mins</span>
                             </div>
                             <div class="movie-info">
+                            <?php if($movie->resolution==0): ?>
                                 <span>HD</span>
+                            <?php elseif($movie->resolution==1): ?>
+                                <span>SD</span>
+                            <?php elseif($movie->resolution==2): ?>
+                                <span>HDCam</span>
+                            <?php elseif($movie->resolution==3): ?>
+                                <span>Cam</span>
+                            <?php elseif($movie->resolution==4): ?>
+                                <span>FullHD</span>
+                            <?php elseif($movie->resolution==5): ?>
+                                <span>Trailer</span>
+                            <?php endif; ?>
                             </div>
                             <div class="movie-info">
                                 <span>16+</span>
@@ -60,141 +93,22 @@
                         </div>
                     </div>
                 </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/resident-evil.jpg" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Resident Evil
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/captain-marvel.png" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Captain Marvel
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/hunter-killer.jpg" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Hunter Killer
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/blood-shot.jpg" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Bloodshot
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- END MOVIE ITEM -->
-                <!-- MOVIE ITEM -->
-                <a href="#" class="movie-item">
-                    <img src="./images/movies/call.jpg" alt="">
-                    <div class="movie-item-content">
-                        <div class="movie-item-title">
-                            Call
-                        </div>
-                        <div class="movie-infos">
-                            <div class="movie-info">
-                                <i class="bx bxs-star"></i>
-                                <span>9.5</span>
-                            </div>
-                            <div class="movie-info">
-                                <i class="bx bxs-time"></i>
-                                <span>120 mins</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>HD</span>
-                            </div>
-                            <div class="movie-info">
-                                <span>16+</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- END MOVIE ITEM -->
+                    
+                <?php endif; ?>
+                
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+            
+                   <!-- END MOVIE ITEM -->
+                </div>
             </div>
         </div>
-    </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        
+       
+ 
+    
     
     <!-- END LATEST MOVIES SECTION -->
 

@@ -6,7 +6,15 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Quản lí thể loại</div>
-
+                 <?php if($errors->any()): ?>
+                    <div class="alert alert-danger">
+                        <ul>
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?><li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
                 <div class="card-body">
                     <?php if(session('status')): ?>
                         <div class="alert alert-success" role="alert">
@@ -53,44 +61,7 @@
 
                 </div>
             </div>
-            <table class="table movie-table" >
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Slug</th>
-                        <th scope="col">Active/Inactive</th>
-                        <th scope="col">Manage</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $__currentLoopData = $list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $cate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <th scope="row"><?php echo e($key); ?></th>
-                        <td><?php echo e($cate->title); ?></td>
-                        <td><?php echo e($cate->slug); ?></td>
-                        <td><?php echo e($cate->description); ?></td>
-                        <td>
-                            <?php if($cate->status): ?>
-                                Hiển thị
-                            <?php else: ?>
-                                Không hiển thị
-                            <?php endif; ?>
-                        </td>
-                        <td class="d-flex">
-                            <?php echo Form::open(['method'=>'DELETE','route'=>['genre.destroy',$cate->id],'onsubmit'=>'return confirm("Xóa hay không xóa")']); ?>
-
-                                <?php echo Form::submit('Xóa',['class'=>'btn btn-danger']); ?>
-
-                            <?php echo Form::close(); ?>
-
-                            <a href="<?php echo e(route('genre.edit',$cate->id)); ?>" class="btn btn-warning">Sửa</a>
-                        </td>
-                    </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </tbody>
-            </table>
+           
         </div>
     </div>
 </div>

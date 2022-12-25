@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>
         UIT Movie Xem phim chất lượng cao
     </title>
@@ -16,6 +18,7 @@
     <!-- BOX ICONS -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/33a0750604.js" crossorigin="anonymous"></script>
 
     <!-- APP CSS -->
     <link rel="stylesheet" href="{{asset('./css/app.css')}}">
@@ -30,7 +33,7 @@
     <div class="nav-wrapper">
         <div class="container-fluid ">
             <div class="nav">
-                <a href="#" class="logo ms-3">
+                <a href="{{route('home')}}" class="logo ms-3">
                     <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T MOVIE
                 </a>
                 <ul class="nav-menu" id="nav-menu">
@@ -56,11 +59,11 @@
                     @endforeach
                     <li><a href="#">About</a></li>
                
-                    <li>
+                   <!--  <li>
                         <a href="#" class="btn btn-hover">
                             <span>Sign in</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- MOBILE MENU TOGGLE -->
                 <div class="hamburger-menu" id="hamburger-menu">
@@ -90,43 +93,39 @@
             <li class="active mt-1">Tập 1</li>
          </ol> -->
          <div class="clearfix wrap-content">
-         <iframe width="100%" height="650" src="https://www.youtube.com/embed/j8U06veqxdU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+         <iframe width="100%" height="650" src="https://www.youtube.com/embed/nzj7Wg4DAbs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
          </iframe>
          <div class="div-control" style="margin-bottom:80px">
-            <div id="fb-like-fanpage" class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/motsub/" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="false" data-colorscheme="dark" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=711081303025670&amp;color_scheme=dark&amp;container_width=0&amp;href=https%3A%2F%2Fwww.facebook.com%2Fmotsub%2F&amp;layout=standard&amp;locale=vi_VN&amp;sdk=joey&amp;share=false&amp;show_faces=true&amp;size=small&amp;width="><span style="vertical-align: bottom; width: 450px; height: 28px;"><iframe name="f29a4ae9670410c" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v7.0/plugins/like.php?action=like&amp;app_id=711081303025670&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df1b87323caaaf28%26domain%3Dmotchill.tv%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fmotchill.tv%252Ff3cc9ca2a751a5c%26relation%3Dparent.parent&amp;color_scheme=dark&amp;container_width=0&amp;href=https%3A%2F%2Fwww.facebook.com%2Fmotsub%2F&amp;layout=standard&amp;locale=vi_VN&amp;sdk=joey&amp;share=false&amp;show_faces=true&amp;size=small&amp;width=" style="border: none; visibility: visible; width: 450px; height: 28px;" class=""></iframe></span></div>
+            <!-- <div id="fb-like-fanpage" class="fb-like fb_iframe_widget" data-href="https://www.facebook.com/motsub/" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="false" data-colorscheme="dark" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=711081303025670&amp;color_scheme=dark&amp;container_width=0&amp;href=https%3A%2F%2Fwww.facebook.com%2Fmotsub%2F&amp;layout=standard&amp;locale=vi_VN&amp;sdk=joey&amp;share=false&amp;show_faces=true&amp;size=small&amp;width="><span style="vertical-align: bottom; width: 450px; height: 28px;"><iframe name="f29a4ae9670410c" width="1000px" height="1000px" data-testid="fb:like Facebook Social Plugin" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v7.0/plugins/like.php?action=like&amp;app_id=711081303025670&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df1b87323caaaf28%26domain%3Dmotchill.tv%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fmotchill.tv%252Ff3cc9ca2a751a5c%26relation%3Dparent.parent&amp;color_scheme=dark&amp;container_width=0&amp;href=https%3A%2F%2Fwww.facebook.com%2Fmotsub%2F&amp;layout=standard&amp;locale=vi_VN&amp;sdk=joey&amp;share=false&amp;show_faces=true&amp;size=small&amp;width=" style="border: none; visibility: visible; width: 450px; height: 28px;" class=""></iframe></span></div> -->
             <span class="video-btn" id="btn_lightbulb" title="Tắt đèn"><i class="fa fa-lightbulb-o"></i></span>
             <span class="video-btn" id="btn_fullscreen" title="Fullscreen player"><i class="fa fa-expand"></i>Toàn màn hình</span>
             <span class="video-btn active" id="btn_autonext" title="Turn off Auto-next"><i class="fa fa-step-forward"></i></span>
             <span class="video-btn" id="btn_stopads" title="Tắt quảng cáo"><i class="fa fa-eye-slash"></i>Tắt QC</span>              
          </div>
          <div class="level genres">
-         <div class="level-left justify-content-between">
+         <div class="level-left justify-content-center">
             <div class="level-item">
-               <a href="https://www.facebook.com/sharer/sharer.php?u=https://xemphim.onl/tv/phantom-pups~26088" class="fb-share button is-link" target="_blank">
-                <i class="fa-brands fa-square-facebook"></i> Chia sẻ
+            @php
+                $current_url_share=Request::url();
+            @endphp
+               <a href="https://www.facebook.com/sharer/sharer.php?u={{$current_url_share}}" class="fb-share button is-link" target="_blank">
+                <i class="fa-solid fa-share"></i> Chia sẻ
                </a>
             </div>
             <div class="level-item">
                <div class="dropdown is-hoverable">
-                  <div class="dropdown-trigger">
-                     <button class="collection-btn button is-info is-outlined unadded">
+                  <div class="dropdown-trigger btn-save-fb">
+                     <button class="collection-btn button btn-warning is-info is-outlined unadded ">
                         <i class="fa-solid fa-plus"></i>
                         <!-- -->Bộ sưu tập
+
                      </button>
                   </div>
                </div>
             </div>
-            <div class="level-item">
-                <div class="dropdown is-hoverable">
-                   <div class="dropdown-trigger">
-                      <button class="collection-btn button is-info is-outlined unadded">
-                        <i class="fa-solid fa-film"></i>
-                         <!-- -->Phim Tương Tự
-                      </button>
-                   </div>
+                <div class="fb-save" hidden 
+                    data-uri="{{$current_url_share}}" >
                 </div>
-             </div>
-         </div>
          <!-- <div class="mp-tips">Mẹo: Chọn phần của tập phim hoặc đổi server dự phòng ở bên dưới</div> -->
          @if($movie->thuocphim=='phimbo')
             <div class="mp-tips mt-3">Mẹo: Chọn phần của tập phim hoặc đổi server dự phòng ở bên dưới</div>
@@ -185,188 +184,48 @@
                 <div class="section-header">
                     Phim tương tự
                 </div>
-                <div class="movies-slide carousel-nav-center owl-carousel">
+                <div class="movies-slide movie-related carousel-nav-center owl-carousel">
                     <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/theatre-dead.jpg" alt="">
+                    @foreach($movie_related as $key => $mov)
+                    <a href="{{route('movie',$mov->slug)}}" class="movie-item">
+                        <img src="{{asset('uploads/movie/'.$mov->image)}}" alt="">
                         <div class="movie-item-content">
                             <div class="movie-item-title">
-                                Theatre of the dead
+                                {{$mov->title}}
                             </div>
                             <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
+                            <div class="movie-info">
+                                <i class="bx bxs-star"></i>
+                                <span>{{$mov->imdb_point}}</span>
+                            </div>
+                            <div class="movie-info">
+                                <i class="bx bxs-time"></i>
+                                <span>{{$mov->runtime}} mins</span>
+                            </div>
+                            <div class="movie-info">
+                            @if($mov->resolution==0)
+                                <span>HD</span>
+                            @elseif($mov->resolution==1)
+                                <span>SD</span>
+                            @elseif($mov->resolution==2)
+                                <span>HDCam</span>
+                            @elseif($mov->resolution==3)
+                                <span>Cam</span>
+                            @elseif($mov->resolution==4)
+                                <span>FullHD</span>
+                            @elseif($mov->resolution==5)
+                                <span>Trailer</span>
+                            @endif
+                                
+                            </div>
+                            <div class="movie-info">
+                                <span>16+</span>
                             </div>
                         </div>
-                    </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/transformer.jpg" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Transformer
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
                         </div>
                     </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/resident-evil.jpg" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Resident Evil
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/captain-marvel.png" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Captain Marvel
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/hunter-killer.jpg" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Hunter Killer
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/blood-shot.jpg" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Bloodshot
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <!-- END MOVIE ITEM -->
-                    <!-- MOVIE ITEM -->
-                    <a href="#" class="movie-item">
-                        <img src="./images/movies/call.jpg" alt="">
-                        <div class="movie-item-content">
-                            <div class="movie-item-title">
-                                Call
-                            </div>
-                            <div class="movie-infos">
-                                <div class="movie-info">
-                                    <i class="bx bxs-star"></i>
-                                    <span>9.5</span>
-                                </div>
-                                <div class="movie-info">
-                                    <i class="bx bxs-time"></i>
-                                    <span>120 mins</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>HD</span>
-                                </div>
-                                <div class="movie-info">
-                                    <span>16+</span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    @endforeach
+                    
                     <!-- END MOVIE ITEM -->
                 </div>
             </div>
@@ -377,7 +236,7 @@
         @php
             $current_url=Request::url();
         @endphp
-        <div class="fb-comments" data-href="{{$current_url}}" data-width="100%" data-numposts="10"></div>
+        <div class="fb-comments" data-colorscheme="light" data-href="{{$current_url}}" data-width="100%" data-numposts="10"></div>
         <!-- END LATEST MOVIES SECTION -->
         </main>
     </div>
@@ -388,12 +247,10 @@
                 <div class="col-4 col-md-6 col-sm-12">
                     <div class="content">
                         <a href="#" class="logo">
-                            <i class='bx bx-movie-play bx-tada main-color'></i>Fl<span class="main-color">i</span>x
+                            <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T Movie
                         </a>
                         <p>
-                            Chiến binh Báo Đen: Wakanda bất diệt là một bộ phim siêu anh hùng của Hoa Kỳ công chiếu năm 2022, 
-                            dựa trên nhân vật Black Panther của Marvel Comics, được sản xuất bởi Marvel Studios và phân phối 
-                            bởi Walt Disney Studios Motion Pictures.
+                           UIT Movie mang đến cho các bạn các tập phim bộ, lẻ chiếu rạp mới nhất, hấp dẫn nhất, cập nhật thường, full Vietsub, miễn phí online thường xuyên cùng với đường truyền tốc độ cao, ổn định, đảm bảo trải nghiệm xem phim trọn vẹn chân thực như ở rạp chiếu phim chuyên nghiệp.
                         </p>
                         <div class="social-list">
                             <a href="#" class="social-item">
@@ -522,6 +379,21 @@
                 })
     </script>
     <div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0" nonce="6Y7UFZb5"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0" nonce="6Y7UFZb5"></script>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v15.0" nonce="fZJJWcOd"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            $(".collection-btn").one('click',function(){
+
+                $('.btn-save-fb').empty();
+                $('.fb-save').click();
+                $('.btn-save-fb').append('<button class="collection-btn button btn-warning is-info is-outlined unadded "><i class="fa-solid fa-check"></i><!-- -->Đã lưu vào Facebook</button></div>')
+            })
+        })
+    </script>   
 </body>
 </html>

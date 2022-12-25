@@ -7,10 +7,19 @@
             <div class="card">
                 <a href="<?php echo e(route('movie.index')); ?>" class="btn btn-primary">Liệt kê phim</a>
                 <div class="card-header">Quản lí Phim</div>
-                <div class="d-flex justify-content-between col-6 my-2 ms-2 align-items-center">
+                 <?php if($errors->any()): ?>
+                    <div class="alert alert-danger">
+                        <ul>
+                            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($error); ?><li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
+                <div class="d-flex justify-content-between col-6 my-2 ms-2 align-items-center" style="display: flex ;background-color: white; justify-content: between;">
                                     <input type="text" name="" id="add-movie-input" title="Thêm nhanh" placeholder="Nhập tmdb ID">
-                                    <div class="select">
-                                         <select id="select_api">
+                                    <div class="select" style=" height : 100%">
+                                         <select id="select_api" >
                                             <option selected="" value="movie">Phim lẻ</option>
                                             <option value="show">Phim dài tập/Show</option>                            
                                         </select>

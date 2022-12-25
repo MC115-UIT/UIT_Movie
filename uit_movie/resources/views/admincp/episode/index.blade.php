@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <a href="{{route('episode.create')}}" class="btn btn-primary my-3">Thêm tập phim</a>
-            <table class="table movie-table">
+            <table class="table movie-table" id="movie-table">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
