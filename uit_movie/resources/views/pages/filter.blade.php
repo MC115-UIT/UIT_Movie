@@ -4,7 +4,7 @@
     <div class="section ms-2 pt-3">
         <div class="container-fluid">
             <div class="section-header ms-2">
-                Filter
+                Kết quả lọc
             </div>
             <div class=" movie-cards justify-content-between align-items-center ps-2">
                 <!-- MOVIE ITEM -->

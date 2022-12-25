@@ -203,6 +203,7 @@
                                  @foreach($category as $key => $cate)
                             <option value="{{$cate->id}}" {{ ( isset($_GET['category'])  && $_GET['category']==$cate->id) ? 'selected' : '' }}>{{$cate->title}}</option>
                                 @endforeach
+                            <option value="-1" {{ ( isset($_GET['category'])  && $_GET['category']==-1) ? 'selected' : '' }}>Phim Hot</option>
                              </select>
                           </div>
                        </div>
