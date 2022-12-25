@@ -383,7 +383,7 @@
                             <i class='bx bx-movie-play bx-tada main-color'></i>U<span class="main-color">I</span>T Movie
                         </a>
                         <p>
-                            UIT Movie mang đến cho các bạn các tập phim bộ, lẻ chiếu rạp mới nhất, hấp dẫn nhất, cập nhật thường, full Vietsub, miễn phí online thường xuyên cùng với đường truyền tốc độ cao, ổn định, đảm bảo trải nghiệm xem phim trọn vẹn.
+                            UIT Movie mang đến cho các bạn các tập phim bộ, lẻ chiếu rạp mới nhất, hấp dẫn nhất, cập nhật thường, full Vietsub, miễn phí online thường xuyên cùng với đường truyền tốc độ cao, ổn định, đảm bảo trải nghiệm xem phim trọn vẹn chân thực như ở rạp chiếu phim chuyên nghiệp.
                         </p>
                         <div class="social-list">
                             <a href="#" class="social-item">

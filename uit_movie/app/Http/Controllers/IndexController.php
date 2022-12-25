@@ -58,7 +58,13 @@ class IndexController extends Controller
             $movie=Movie::withCount('episode');
 
             if($get_category !=null && $get_category!=0){
-                $movie=$movie->where('category_id','=',$get_category);
+                if($get_category==-1)
+                {
+                        $movie=$movie->where('hot','=',1);
+                }else{
+                         $movie=$movie->where('category_id','=',$get_category);
+                }
+               
             }
             if($get_genre!=null && $get_genre!=0){
 
